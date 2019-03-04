@@ -18,7 +18,7 @@ namespace StudentAssAttSys.Core.Core
         public DateTime DateTimeEnd { get; set; }
         [Required]
         [ForeignKey("Lecturer")]
-        public string LectureId { get; set; }
+        public string LecturerId { get; set; }
         [Required]
         [ForeignKey("Module")]
         public int ModuleId { get; set; }
