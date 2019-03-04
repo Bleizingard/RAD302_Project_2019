@@ -18,6 +18,7 @@ namespace StudentAssAttSys.Core.Core
         public string StudentId { get; set; }
 
         [Required]
+        [Range(0, 100)]
         public uint Mark { get; set; }
 
         public virtual Assessment Assessment { get; set; }
