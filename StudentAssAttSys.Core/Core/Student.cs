@@ -17,5 +17,7 @@ namespace StudentAssAttSys.Core.Core
         public int ClassId { get; set; }
 
         public virtual ClassGroup Class { get; set; }
+        public virtual List<Attendance> Attendances { get; set; }
+
     }
 }
