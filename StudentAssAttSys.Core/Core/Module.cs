@@ -11,5 +11,10 @@ namespace StudentAssAttSys.Core.Core
     {
         [Required]
         public string Name { get; set; }
+
+        public double GPAPercentage { get; set; }
+    
+        public virtual List<Lecturer> Lecturers { get; set; }
+        public virtual List<Student> Students { get; set; }
     }
 }
