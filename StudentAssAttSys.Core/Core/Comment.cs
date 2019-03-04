@@ -13,6 +13,7 @@ namespace StudentAssAttSys.Core.Core
         public int ResultId { get; set; }
 
         public virtual Result Result { get; set; }
+        public virtual User User { get; set; }
 
     }
 }

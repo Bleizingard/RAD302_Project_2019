@@ -27,5 +27,6 @@ namespace StudentAssAttSys.Core.Core
         }
 
         public virtual List<Module> Modules { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 }
