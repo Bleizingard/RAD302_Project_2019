@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentAssAttSys.Core.Core
@@ -9,6 +10,8 @@ namespace StudentAssAttSys.Core.Core
         public int Id { get; set; }
         [Required]
         public string Message { get; set; }
+        [Required]
+        public DateTime DateTimeCreation { get; set; }
         [ForeignKey("Result")]
         public int ResultId { get; set; }
 
