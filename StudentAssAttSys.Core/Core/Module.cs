@@ -16,5 +16,6 @@ namespace StudentAssAttSys.Core.Core
     
         public virtual List<Lecturer> Lecturers { get; set; }
         public virtual List<Student> Students { get; set; }
+        public virtual List<Assessment> Assessments { get; set; }
     }
 }

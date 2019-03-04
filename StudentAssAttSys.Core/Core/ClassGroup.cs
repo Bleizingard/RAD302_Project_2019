@@ -15,5 +15,7 @@ namespace StudentAssAttSys.Core.Core
         public string Name { get; set; }
 
         public virtual List<Student> Students { get; set; }
+        public virtual List<Assessment> Assessments { get; set; }
+
     }
 }
