@@ -25,5 +25,7 @@ namespace StudentAssAttSys.Core.Core
                 return FirstName + ' ' + LastName;
             }
         }
+
+        public virtual List<Module> Modules { get; set; }
     }
 }

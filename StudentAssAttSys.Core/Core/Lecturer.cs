@@ -8,6 +8,5 @@ namespace StudentAssAttSys.Core.Core
 {
     public class Lecturer : User
     {
-        public virtual List<Module> Modules { get; set; }
     }
 }
