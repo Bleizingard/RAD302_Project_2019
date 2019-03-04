@@ -15,11 +15,8 @@ namespace StudentAssAttSys.Core.Core
         [Required]
         [ForeignKey("Class")]
         public int ClassId { get; set; }
-        [Required]
-        [ForeignKey("Module")]
-        public int ModuleId { get; set; }
 
-        public virtual Module Module { get; set; }
+        public virtual List<Module> Modules { get; set; }
         public virtual ClassGroup Class { get; set; }
     }
 }
