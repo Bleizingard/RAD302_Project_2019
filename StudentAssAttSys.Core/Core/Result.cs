@@ -22,5 +22,6 @@ namespace StudentAssAttSys.Core.Core
 
         public virtual Assessment Assessment { get; set; }
         public virtual Student Student { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 }
