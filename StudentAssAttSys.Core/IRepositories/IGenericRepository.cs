@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace StudentAssAttSys.Core.IRepositories
 {
+    /**
+     * <typeparam name="T">Object</typeparam>
+     * <typeparam name="Y">Type of the PrimaryKey of T</typeparam>
+     */
     public interface IGenericRepository<T, Y>
     {
         T GetById(Y id);
