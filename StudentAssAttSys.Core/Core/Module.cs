@@ -9,6 +9,8 @@ namespace StudentAssAttSys.Core.Core
 {
     public class Module
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
