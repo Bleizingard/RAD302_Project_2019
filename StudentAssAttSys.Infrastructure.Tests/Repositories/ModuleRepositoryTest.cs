@@ -9,9 +9,16 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
     {
         private ModuleRepository Repository = new ModuleRepository();
 
+        [SetUp]
+        public void Setup()
+        {
+            Repository = new ModuleRepository();
+        }
+
         [Test]
         public void ShouldAddModule()
         {
+
         }
 
         [Test]
