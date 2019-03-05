@@ -67,7 +67,6 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             int moduleId = Repository.Add(new Module { Name = "ShouldGetModuleByIdTest", GPAPercentage = 1.0 });
             Module module = Repository.GetById(moduleId);
-
             Assert.That(module.Name, Is.EqualTo("ShouldGetModuleByIdTest"));
         }
 
