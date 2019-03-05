@@ -10,7 +10,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
 {
     public class ModuleRepository : IGenericRepository<Module>
     {
-        public bool Add(Module o)
+        public object Add(Module o)
         {
             throw new NotImplementedException();
         }

@@ -10,7 +10,7 @@ namespace StudentAssAttSys.Core.IRepositories
     {
         T GetById(int id);
         T GetById(string id);
-        bool Add(T o);
+        object Add(T o);
         bool Edit(T o);
         bool Remove(T o);
         List<T> GetAll();
