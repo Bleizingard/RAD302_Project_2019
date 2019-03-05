@@ -57,11 +57,13 @@
     <Compile Include="Core\Result.cs" />
     <Compile Include="Core\Student.cs" />
     <Compile Include="Core\User.cs" />
+    <Compile Include="IRepositories\IGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
