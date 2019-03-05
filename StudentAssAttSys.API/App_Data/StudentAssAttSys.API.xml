@@ -481,8 +481,32 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:StudentAssAttSys.API.Controllers.ValuesController.Delete(System.Int32)">
-            <summary>DELETE api/values/5</summary>
+        <member name="T:StudentAssAttSys.API.Controllers.ModulesController">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentAssAttSys.API.Controllers.ModulesController.Get">
+            <summary>Return the list of all Modules</summary>
+        </member>
+        <member name="T:StudentAssAttSys.API.Controllers.ModuleController">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentAssAttSys.API.Controllers.ModuleController.Get(System.Int32)">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentAssAttSys.API.Controllers.ModuleController.Post(System.Int32,StudentAssAttSys.Core.Core.Module)">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentAssAttSys.API.Controllers.ModuleController.Put(System.String)">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentAssAttSys.API.Controllers.ModuleController.Delete(System.Int32)">
+            <summary></summary>
+            <returns></returns>
         </member>
     </members>
 </doc>
