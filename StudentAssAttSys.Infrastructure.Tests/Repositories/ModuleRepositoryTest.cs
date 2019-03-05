@@ -51,7 +51,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
                 GPAPercentage = 10.00
             };
 
-            int result = (int) Repository.Add(module);
+            int result = Repository.Add(module);
             Assert.That(result, Is.GreaterThan(0));
         }
 
@@ -65,7 +65,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [Test]
         public void ShouldGetModuleById()
         {
-            int moduleId = (int) Repository.Add(new Module { Name = "ShouldGetModuleByIdTest", GPAPercentage = 1.0 });
+            int moduleId = Repository.Add(new Module { Name = "ShouldGetModuleByIdTest", GPAPercentage = 1.0 });
             Module module = Repository.GetById(moduleId);
 
             Assert.That(module.Name, Is.EqualTo("ShouldGetModuleByIdTest"));
@@ -74,7 +74,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [Test]
         public void ShouldEditModule()
         {
-            int moduleId = (int) Repository.Add(new Module { Name = "ShouldEditModuleTest", GPAPercentage = 1.0 });
+            int moduleId = Repository.Add(new Module { Name = "ShouldEditModuleTest", GPAPercentage = 1.0 });
             Module module = Repository.GetById(moduleId);
 
             module.Name = "ShouldEditModuleTestEdited";
@@ -93,12 +93,6 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             bool result = Repository.Remove(module);
 
             Assert.That(result, Is.EqualTo(true));
-        }
-
-        [Test]
-        public void ShouldThrowNotImplementedError()
-        {
-            Assert.Throws<NotImplementedException>(() => Repository.GetById(string.Empty));
         }
     }
 }

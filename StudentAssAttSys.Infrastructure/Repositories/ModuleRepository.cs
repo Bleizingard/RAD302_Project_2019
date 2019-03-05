@@ -8,9 +8,9 @@ using StudentAssAttSys.Core.IRepositories;
 
 namespace StudentAssAttSys.Infrastructure.Repositories
 {
-    public class ModuleRepository : IGenericRepository<Module>
+    public class ModuleRepository : IGenericRepository<Module, int>
     {
-        public object Add(Module o)
+        public int Add(Module o)
         {
             throw new NotImplementedException();
         }
@@ -26,11 +26,6 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         }
 
         public Module GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Module GetById(string id)
         {
             throw new NotImplementedException();
         }

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace StudentAssAttSys.Core.IRepositories
 {
-    public interface IGenericRepository<T>
+    public interface IGenericRepository<T, Y>
     {
-        T GetById(int id);
-        T GetById(string id);
-        object Add(T o);
+        T GetById(Y id);
+        Y Add(T o);
         bool Edit(T o);
         bool Remove(T o);
         List<T> GetAll();
