@@ -16,13 +16,13 @@ namespace StudentAssAttSys.API.Tests.Controllers
         [TestMethod]
         public void Get()
         {
-            // Arrange
+            // Réorganiser
             ValuesController controller = new ValuesController();
 
-            // Act
+            // Agir
             IEnumerable<string> result = controller.Get();
 
-            // Assert
+            // Déclarer
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count());
             Assert.AreEqual("value1", result.ElementAt(0));
@@ -32,50 +32,50 @@ namespace StudentAssAttSys.API.Tests.Controllers
         [TestMethod]
         public void GetById()
         {
-            // Arrange
+            // Réorganiser
             ValuesController controller = new ValuesController();
 
-            // Act
+            // Agir
             string result = controller.Get(5);
 
-            // Assert
+            // Déclarer
             Assert.AreEqual("value", result);
         }
 
         [TestMethod]
         public void Post()
         {
-            // Arrange
+            // Réorganiser
             ValuesController controller = new ValuesController();
 
-            // Act
+            // Agir
             controller.Post("value");
 
-            // Assert
+            // Déclarer
         }
 
         [TestMethod]
         public void Put()
         {
-            // Arrange
+            // Réorganiser
             ValuesController controller = new ValuesController();
 
-            // Act
+            // Agir
             controller.Put(5, "value");
 
-            // Assert
+            // Déclarer
         }
 
         [TestMethod]
         public void Delete()
         {
-            // Arrange
+            // Réorganiser
             ValuesController controller = new ValuesController();
 
-            // Act
+            // Agir
             controller.Delete(5);
 
-            // Assert
+            // Déclarer
         }
     }
 }

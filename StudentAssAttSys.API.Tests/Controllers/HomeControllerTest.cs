@@ -11,13 +11,13 @@ namespace StudentAssAttSys.API.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-            // Arrange
+            // Disposer
             HomeController controller = new HomeController();
 
-            // Act
+            // Agir
             ViewResult result = controller.Index() as ViewResult;
 
-            // Assert
+            // Affirmer
             Assert.IsNotNull(result);
             Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
