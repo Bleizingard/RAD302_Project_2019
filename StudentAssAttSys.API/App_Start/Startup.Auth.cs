@@ -43,7 +43,7 @@ namespace StudentAssAttSys.API
         /// Configure OWIN to use OpenIdConnect 
         /// </summary>
         /// <param name="app"></param>
-        public void Configuration(IAppBuilder app)
+        public void ConfigureAuth(IAppBuilder app)
         {
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
@@ -153,6 +153,6 @@ namespace StudentAssAttSys.API
         //    ClientId = "",
         //    ClientSecret = ""
         //});
+        //}
     }
-}
 }

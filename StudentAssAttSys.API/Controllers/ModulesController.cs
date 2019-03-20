@@ -1,4 +1,6 @@
 ﻿using StudentAssAttSys.Core.Core;
+using StudentAssAttSys.Core.IRepositories;
+using StudentAssAttSys.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,14 @@ namespace StudentAssAttSys.API.Controllers
     [RoutePrefix("api/Modules")]
     public class ModulesController : ApiController
     {
+        //Repository
+        IGenericRepository<Module, int> Repository { get; set; }
+
+        public ModulesController()
+        {
+            Repository = new ModuleRepository();
+        }
+
         // GET: api/Modules
         /**
          * <summary>Return the list of all Modules</summary>
@@ -26,7 +36,8 @@ namespace StudentAssAttSys.API.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            return null;
+            List<Module> modules = Repository.GetAll();
+            return Content(HttpStatusCode.OK, modules);
         }
     }
     /**
@@ -37,6 +48,14 @@ namespace StudentAssAttSys.API.Controllers
     [RoutePrefix("api/Module")]
     public class ModuleController : ApiController
     {
+        //Repository
+        IGenericRepository<Module, int> Repository { get; set; }
+
+        public ModuleController()
+        {
+            Repository = new ModuleRepository();
+        }
+
         // GET: api/Modules/5
         /**
          * <summary></summary>
@@ -47,7 +66,13 @@ namespace StudentAssAttSys.API.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            return null;
+            Module module = Repository.GetById(id);
+
+            if (module == null)
+            {
+                return Content(HttpStatusCode.NotFound, "");
+            }
+            return Content(HttpStatusCode.OK, module);
         }
 
 
@@ -61,7 +86,16 @@ namespace StudentAssAttSys.API.Controllers
         [HttpPost]
         public IHttpActionResult Post(int id, [FromBody]Module module)
         {
-            return null;
+            module.Id = id;
+
+            bool result = Repository.Edit(module);
+
+            if (!result)
+            {
+                return Content(HttpStatusCode.BadRequest, "");
+            }
+
+            return Content(HttpStatusCode.OK, "");
         }
 
         // PUT: api/Module
@@ -72,9 +106,16 @@ namespace StudentAssAttSys.API.Controllers
         [Route("")]
         [ResponseType(typeof(HttpStatusCode))]
         [HttpPut]
-        public IHttpActionResult Put([FromBody]string value)
+        public IHttpActionResult Put([FromBody]Module module)
         {
-            return null;
+            int moduleId = Repository.Add(module);
+
+            if (moduleId < 1)
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+
+            return Content(HttpStatusCode.OK, "");
         }
 
         // DELETE: api/Modules/5
@@ -87,6 +128,17 @@ namespace StudentAssAttSys.API.Controllers
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
+            Module module = Repository.GetById(id);
+            if (module == null)
+            {
+                return Content(HttpStatusCode.NotFound, "");
+            }
+
+            if(!Repository.Remove(module))
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+
             return null;
         }
     }
