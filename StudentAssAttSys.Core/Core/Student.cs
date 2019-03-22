@@ -12,12 +12,6 @@ namespace StudentAssAttSys.Core.Core
     {
         [Required]
         public string StudentNumber { get; set; }
-        [Required]
-        [ForeignKey("Class")]
-        public int ClassId { get; set; }
-
-        public virtual ClassGroup Class { get; set; }
-        public virtual List<Attendance> Attendances { get; set; }
-
+        
     }
 }
