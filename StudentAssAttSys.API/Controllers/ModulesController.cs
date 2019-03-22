@@ -56,7 +56,7 @@ namespace StudentAssAttSys.API.Controllers
             Repository = new ModuleRepository();
         }
 
-        // GET: api/Modules/5
+        // GET: api/Module/5
         /**
          * <summary></summary>
          * <returns></returns>
@@ -123,7 +123,7 @@ namespace StudentAssAttSys.API.Controllers
             return Content(HttpStatusCode.OK, module);
         }
 
-        // DELETE: api/Modules/5
+        // DELETE: api/Module/5
         /**
          * <summary></summary>
          * <returns></returns>
