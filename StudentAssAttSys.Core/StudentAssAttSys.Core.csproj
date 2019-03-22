@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Core\Assessment.cs" />
     <Compile Include="Core\Attendance.cs" />
-    <Compile Include="Core\ClassGroup.cs" />
     <Compile Include="Core\Comment.cs" />
     <Compile Include="Core\Lecturer.cs" />
     <Compile Include="Core\Module.cs" />
