@@ -56,7 +56,7 @@ namespace StudentAssAttSys.API.Controllers
             Repository = new ModuleRepository();
         }
 
-        // GET: api/Modules/5
+        // GET: api/Module/5
         /**
          * <summary></summary>
          * <returns></returns>
@@ -83,7 +83,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("{id:int}")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Module))]
         [HttpPost]
         public IHttpActionResult Post(int id, [FromBody]Module module)
         {
@@ -107,7 +107,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Module))]
         [HttpPut]
         public IHttpActionResult Put([FromBody]Module module)
         {
@@ -120,10 +120,10 @@ namespace StudentAssAttSys.API.Controllers
 
             module = Repository.GetById(moduleId);
 
-            return Content(HttpStatusCode.OK, module);
+            return Content(HttpStatusCode.Created, module);
         }
 
-        // DELETE: api/Modules/5
+        // DELETE: api/Module/5
         /**
          * <summary></summary>
          * <returns></returns>
@@ -143,8 +143,8 @@ namespace StudentAssAttSys.API.Controllers
             {
                 return Content(HttpStatusCode.InternalServerError, "");
             }
-
-            return null;
+            
+            return Content(HttpStatusCode.OK, "");
         }
     }
 }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentAssAttSys.API", "Stu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentAssAttSys.API.Tests", "StudentAssAttSys.API.Tests\StudentAssAttSys.API.Tests.csproj", "{4361E9F9-CCFA-4C8E-87CD-DF5401C3273E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentAssAttSys.FrontEnd", "StudentAssAttSys.FrontEnd\StudentAssAttSys.FrontEnd.csproj", "{AA5344C4-E9FB-4DA4-8E5E-27145DDDFD27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4361E9F9-CCFA-4C8E-87CD-DF5401C3273E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4361E9F9-CCFA-4C8E-87CD-DF5401C3273E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4361E9F9-CCFA-4C8E-87CD-DF5401C3273E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA5344C4-E9FB-4DA4-8E5E-27145DDDFD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA5344C4-E9FB-4DA4-8E5E-27145DDDFD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA5344C4-E9FB-4DA4-8E5E-27145DDDFD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA5344C4-E9FB-4DA4-8E5E-27145DDDFD27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
