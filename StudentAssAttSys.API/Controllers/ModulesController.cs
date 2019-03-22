@@ -36,7 +36,7 @@ namespace StudentAssAttSys.API.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            List<Module> modules = Repository.GetAll();
+            Module[] modules = Repository.GetAll();
             return Content(HttpStatusCode.OK, modules);
         }
     }
@@ -72,6 +72,7 @@ namespace StudentAssAttSys.API.Controllers
             {
                 return Content(HttpStatusCode.NotFound, "");
             }
+
             return Content(HttpStatusCode.OK, module);
         }
 
@@ -95,7 +96,9 @@ namespace StudentAssAttSys.API.Controllers
                 return Content(HttpStatusCode.BadRequest, "");
             }
 
-            return Content(HttpStatusCode.OK, "");
+            module = Repository.GetById(id);
+
+            return Content(HttpStatusCode.OK, module);
         }
 
         // PUT: api/Module
@@ -115,7 +118,9 @@ namespace StudentAssAttSys.API.Controllers
                 return Content(HttpStatusCode.InternalServerError, "");
             }
 
-            return Content(HttpStatusCode.OK, "");
+            module = Repository.GetById(moduleId);
+
+            return Content(HttpStatusCode.OK, module);
         }
 
         // DELETE: api/Modules/5

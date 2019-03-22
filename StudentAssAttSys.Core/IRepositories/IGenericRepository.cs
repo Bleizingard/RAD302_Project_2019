@@ -16,6 +16,6 @@ namespace StudentAssAttSys.Core.IRepositories
         Y Add(T o);
         bool Edit(T o);
         bool Remove(T o);
-        List<T> GetAll();
+        T[] GetAll();
     }
 }
