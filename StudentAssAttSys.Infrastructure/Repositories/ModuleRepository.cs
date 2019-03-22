@@ -31,7 +31,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          * <summary>Get all <c>Module</c> from the database</summary>
          * <returns>Returns <c>true</c> if succeed else false</returns>
          */
-        public List<Module> GetAll()
+        public Module[] GetAll()
         {
             throw new NotImplementedException();
         }
