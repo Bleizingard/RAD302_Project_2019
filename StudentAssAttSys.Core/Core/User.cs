@@ -28,5 +28,8 @@ namespace StudentAssAttSys.Core.Core
 
         public virtual List<Module> Modules { get; set; }
         public virtual List<Comment> Comments { get; set; }
+
+        public virtual List<Assessment> Assessments { get; set; }
+        public virtual List<Attendance> Attendances { get; set; }
     }
 }
