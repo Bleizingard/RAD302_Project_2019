@@ -16,7 +16,7 @@ namespace StudentAssAttSys.API.Controllers
     * <returns></returns>
     */
     [Authorize]
-    [RoutePrefix("api/Lecturers")]
+    [RoutePrefix("api/Lecturer")]
     public class LecturersController : ApiController
     {
         //Repository
@@ -31,29 +31,13 @@ namespace StudentAssAttSys.API.Controllers
         /**
          * <summary>Return the list of all Lecturers</summary>
          */
-        [Route("")]
+        [Route("~/api/Lecturers")]
         [ResponseType(typeof(Lecturer[]))]
         [HttpGet]
         public IHttpActionResult Get()
         {
             Lecturer[] lecturers = Repository.GetAll();
             return Content(HttpStatusCode.OK, lecturers);
-        }
-    }
-    /**
-    * <summary></summary>
-    * <returns></returns>
-    */
-    [Authorize]
-    [RoutePrefix("api/Lecturer")]
-    public class LecturerController : ApiController
-    {
-        //Repository
-        IGenericRepository<Lecturer, string> Repository { get; set; }
-
-        public LecturerController()
-        {
-            //Repository = new LecturerRepository();
         }
 
         // GET: api/Lecturer/5
