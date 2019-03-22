@@ -131,55 +131,6 @@ namespace StudentAssAttSys.API.Controllers
             return Content(HttpStatusCode.OK, "");
         }
 
-        // GET: api/Assessment/5/results
-        /**
-         * <summary></summary>
-         * <returns></returns>
-         */
-        [Route("{id:int}/results")]
-        [ResponseType(typeof(HttpStatusCode))]
-        [HttpGet]
-        public IHttpActionResult GetResults(int id)
-        {
-            Assessment assessment = Repository.GetById(id);
-
-            if (assessment == null)
-            {
-                return Content(HttpStatusCode.NotFound, "");
-            }
-
-            Result[] results = assessment.Results.ToArray();
-
-            return Content(HttpStatusCode.OK, results);
-        }
-
-        // GET: api/Assessment/5/result/5
-        /**
-         * <summary></summary>
-         * <returns></returns>
-         */
-        [Route("{id:int}/result/{studentId:string}")]
-        [ResponseType(typeof(HttpStatusCode))]
-        [HttpGet]
-        public IHttpActionResult GetResult(int id, string studentId)
-        {
-            Assessment assessment = Repository.GetById(id);
-
-            if (assessment == null)
-            {
-                return Content(HttpStatusCode.NotFound, "");
-            }
-
-            Result result = assessment.Results.Where(r => r.StudentId == studentId).FirstOrDefault();
-
-            if (result == null)
-            {
-                return Content(HttpStatusCode.NotFound, "");
-            }
-
-            return Content(HttpStatusCode.OK, result);
-        }
-
         // GET: api/Assessment/5/result/5/comments
         /**
          * <summary></summary>
