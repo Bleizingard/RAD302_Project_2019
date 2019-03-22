@@ -16,7 +16,7 @@ namespace StudentAssAttSys.API.Controllers
     * <returns></returns>
     */
     [Authorize]
-    [RoutePrefix("api/Modules")]
+    [RoutePrefix("api/Module")]
     public class ModulesController : ApiController
     {
         //Repository
@@ -31,29 +31,13 @@ namespace StudentAssAttSys.API.Controllers
         /**
          * <summary>Return the list of all Modules</summary>
          */
-        [Route("")]
+        [Route("~/api/Modules")]
         [ResponseType(typeof(Module[]))]
         [HttpGet]
         public IHttpActionResult Get()
         {
             Module[] modules = Repository.GetAll();
             return Content(HttpStatusCode.OK, modules);
-        }
-    }
-    /**
-    * <summary></summary>
-    * <returns></returns>
-    */
-    [Authorize]
-    [RoutePrefix("api/Module")]
-    public class ModuleController : ApiController
-    {
-        //Repository
-        IGenericRepository<Module, int> Repository { get; set; }
-
-        public ModuleController()
-        {
-            Repository = new ModuleRepository();
         }
 
         // GET: api/Module/5
@@ -139,11 +123,11 @@ namespace StudentAssAttSys.API.Controllers
                 return Content(HttpStatusCode.NotFound, "");
             }
 
-            if(!Repository.Remove(module))
+            if (!Repository.Remove(module))
             {
                 return Content(HttpStatusCode.InternalServerError, "");
             }
-            
+
             return Content(HttpStatusCode.OK, "");
         }
     }
