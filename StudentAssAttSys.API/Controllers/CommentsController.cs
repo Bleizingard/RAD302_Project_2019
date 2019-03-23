@@ -16,7 +16,7 @@ namespace StudentAssAttSys.API.Controllers
     * <returns></returns>
     */
     [Authorize]
-    [RoutePrefix("api/Assessment/{id:int}/result")]
+    [RoutePrefix("api/Assessment/{id:int}/Result/{studentId}/Comments")]
     public class CommentsController : ApiController
     {
         IGenericRepository<Comment, int> Repository { get; set; }
@@ -25,11 +25,37 @@ namespace StudentAssAttSys.API.Controllers
         {
             //Repository = new CommentRepository();
         }
-        // PUT: api/Assessment/5/result/studentId/comment
+
+        // GET: api/Assessment/5/Result/studentId/Comments
+        [Route("")]
+        [ResponseType(typeof(Module[]))]
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            Comment[] comments = Repository.GetAll();
+            return Content(HttpStatusCode.OK, comments);
+        }
+
+        // PUT: api/Assessment/5/Result/studentId/Comment
         /**
          * <summary></summary>
          * <returns></returns>
          */
-        
+        [Route("api/Assessment/{id:int}/Result/{studentId}/Comment")]
+        [ResponseType(typeof(Comment))]
+        [HttpPut]
+        public IHttpActionResult Put([FromBody]Comment comment)
+        {
+            int commentId = Repository.Add(comment);
+
+            if (commentId < 1)
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+
+            comment = Repository.GetById(commentId);
+
+            return Content(HttpStatusCode.Created, comment);
+        }
     }
 }

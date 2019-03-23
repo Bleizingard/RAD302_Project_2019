@@ -59,5 +59,27 @@ namespace StudentAssAttSys.API.Controllers
 
             return Content(HttpStatusCode.OK, results);
         }
+
+        // PUT: api/Assessment/5/Result
+        /**
+         * <summary></summary>
+         * <returns></returns>
+         */
+        [Route("")]
+        [ResponseType(typeof(Result))]
+        [HttpPut]
+        public IHttpActionResult Put([FromBody]Result result)
+        {
+            KeyValuePair<int, string> resultId = Repository.Add(result);
+
+            if (resultId.Key < 1)
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+
+            result = Repository.GetById(resultId);
+
+            return Content(HttpStatusCode.Created, result);
+        }
     }
 }
