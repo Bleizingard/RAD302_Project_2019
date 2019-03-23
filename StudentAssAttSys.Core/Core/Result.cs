@@ -19,7 +19,7 @@ namespace StudentAssAttSys.Core.Core
 
         [Required]
         [Range(0, 100)]
-        public uint Mark { get; set; }
+        public uint Grade { get; set; }
 
         public virtual Assessment Assessment { get; set; }
         public virtual Student Student { get; set; }
