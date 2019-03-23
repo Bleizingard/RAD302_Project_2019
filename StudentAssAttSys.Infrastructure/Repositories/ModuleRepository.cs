@@ -10,13 +10,19 @@ namespace StudentAssAttSys.Infrastructure.Repositories
 {
     public class ModuleRepository : IGenericRepository<Module, int>
     {
+        private StudentAssAttSysContext context;
+        public ModuleRepository()
+        {
+            context = new StudentAssAttSysContext();
+        }
         /**
          * <summary>Add <c>Module</c> in the database</summary>
          * <returns>Returns the ID of the new Module</returns>
          */
+
         public int Add(Module o)
         {
-            throw new NotImplementedException();
+            return context.Modules.Add(o).Id;
         }
 
         /**
