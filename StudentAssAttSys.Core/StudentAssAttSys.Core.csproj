@@ -56,6 +56,7 @@
     <Compile Include="Core\Result.cs" />
     <Compile Include="Core\Student.cs" />
     <Compile Include="Core\User.cs" />
+    <Compile Include="IRepositories\IAttendanceRepository.cs" />
     <Compile Include="IRepositories\IGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
