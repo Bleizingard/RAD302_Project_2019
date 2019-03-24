@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace StudentAssAttSys.Infrastructure.Repositories
 {
     public class ModuleRepository : IGenericRepository<Module, int>
     {
-        private StudentAssAttSysContext context;
+        private StudentAssAttSysContext context { get; set; }
+
         public ModuleRepository()
         {
             context = new StudentAssAttSysContext();
         }
+
         /**
          * <summary>Add <c>Module</c> in the database</summary>
          * <returns>Returns the ID of the new Module</returns>
@@ -22,7 +25,18 @@ namespace StudentAssAttSys.Infrastructure.Repositories
 
         public int Add(Module o)
         {
-            return context.Modules.Add(o).Id;
+            try
+            {
+
+                o.Id = 0;
+                context.Entry(o).State = EntityState.Added;
+                context.SaveChanges();
+                return o.Id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         /**
@@ -37,16 +51,27 @@ namespace StudentAssAttSys.Infrastructure.Repositories
                 return false;
             }
 
-            module.Id = o.Id;
-            module.Assessments = o.Assessments;
-            module.Attendances = o.Attendances;
-            module.GPAPercentage = o.GPAPercentage;
-            module.Lecturers = o.Lecturers;
-            module.Name = o.Name;
-            module.Students = o.Students;
-            context.SaveChanges();
-            return true;
+            try
+            {
+                module.Id = o.Id;
+                module.Assessments = o.Assessments;
+                module.Attendances = o.Attendances;
+                module.GPAPercentage = o.GPAPercentage;
+                module.Lecturers = o.Lecturers;
+                module.Name = o.Name;
+                module.Students = o.Students;
+
+                context.Entry(module).State = EntityState.Modified;
+
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
+
         /**
          * <summary>Get all <c>Module</c> from the database</summary>
          * <returns>Returns an array of all modules</returns>
@@ -69,13 +94,17 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public bool Remove(Module o)
         {
-            Module deletedModule = context.Modules.Remove(o);
-            if (deletedModule == null)
+            try
+            {
+                context.Entry(o).State = EntityState.Added;
+                context.SaveChanges();
+
+                return true;
+            }
+            catch
             {
                 return false;
             }
-
-            return true;
         }
     }
 }
