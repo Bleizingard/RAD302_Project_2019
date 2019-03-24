@@ -25,13 +25,43 @@ namespace StudentAssAttSys.API.Controllers
             //Repository = new ResultRepository();
         }
 
+        // GET: api/Results
+        /**
+         * <summary></summary>
+         * <returns></returns>
+         */
+        [Route("~/api/Results")]
+        [ResponseType(typeof(Result[]))]
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            Result[] results = Repository.GetAll();
+
+            return Content(HttpStatusCode.OK, results);
+        }
+
+        // GET: api/Assessment/5/Results
+        /**
+         * <summary></summary>
+         * <returns></returns>
+         */
+        [Route("~/api/Assessment/{id:int}/Results")]
+        [ResponseType(typeof(Result[]))]
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            Result[] results = Repository.GetAll().Where(r => r.AssessmentId == id).ToArray();
+
+            return Content(HttpStatusCode.OK, results);
+        }
+
         // GET: api/Result/5
         /**
          * <summary></summary>
          * <returns></returns>
          */
         [Route("{assessmentId:int}/{studentId:string}")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Result))]
         [HttpGet]
         public IHttpActionResult Get(int assessmentId, string studentId)
         {
@@ -45,22 +75,7 @@ namespace StudentAssAttSys.API.Controllers
             return Content(HttpStatusCode.OK, result);
         }
 
-        // GET: api/Assessment/5/results
-        /**
-         * <summary></summary>
-         * <returns></returns>
-         */
-        [Route("~/api/Assessment/{id:int}/Results")]
-        [ResponseType(typeof(HttpStatusCode))]
-        [HttpGet]
-        public IHttpActionResult GetResults(int id)
-        {
-           Result[] results = Repository.GetAll();
-
-            return Content(HttpStatusCode.OK, results);
-        }
-
-        // PUT: api/Assessment/5/Result
+        // PUT: api/Result
         /**
          * <summary></summary>
          * <returns></returns>
@@ -72,7 +87,7 @@ namespace StudentAssAttSys.API.Controllers
         {
             KeyValuePair<int, string> resultId = Repository.Add(result);
 
-            if (resultId.Key < 1)
+            if (resultId.Key != result.AssessmentId || !resultId.Value.Equals(result.StudentId))
             {
                 return Content(HttpStatusCode.InternalServerError, "");
             }
@@ -80,6 +95,55 @@ namespace StudentAssAttSys.API.Controllers
             result = Repository.GetById(resultId);
 
             return Content(HttpStatusCode.Created, result);
+        }
+
+        // POST: api/Result/5/5
+        /**
+         * <summary></summary>
+         * <returns></returns>
+         */
+        [Route("{assessmentId:int}/{studentId:string}")]
+        [ResponseType(typeof(Result))]
+        [HttpPost]
+        public IHttpActionResult Post(int assessmentId, string studentId, [FromBody]Result result)
+        {
+            result.AssessmentId = assessmentId;
+            result.StudentId = studentId;
+
+            bool editResult = Repository.Edit(result);
+
+            if (!editResult)
+            {
+                return Content(HttpStatusCode.BadRequest, "");
+            }
+
+            result = Repository.GetById(new KeyValuePair<int, string>(assessmentId, studentId));
+
+            return Content(HttpStatusCode.OK, result);
+        }
+
+        // DELETE: api/Result/5/5
+        /**
+         * <summary></summary>
+         * <returns></returns>
+         */
+        [Route("{id:int}")]
+        [ResponseType(typeof(HttpStatusCode))]
+        [HttpDelete]
+        public IHttpActionResult Delete(int assessmentId, string studentId)
+        {
+            Result result = Repository.GetById(new KeyValuePair<int, string>(assessmentId, studentId));
+            if (result == null)
+            {
+                return Content(HttpStatusCode.NotFound, "");
+            }
+
+            if (!Repository.Remove(result))
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+
+            return Content(HttpStatusCode.OK, "");
         }
     }
 }

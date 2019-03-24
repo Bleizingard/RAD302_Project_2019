@@ -15,10 +15,10 @@ namespace StudentAssAttSys.API.Controllers
    * <returns></returns>
    */
     [Authorize]
-    [RoutePrefix("api/Attendace")]
+    [RoutePrefix("api/Attendance")]
     public class AttendanceController : ApiController
     {
-        IGenericRepository<Attendance, int> Repository { get; set; }
+        IAttendanceRepository Repository { get; set; }
 
         public AttendanceController()
         {
@@ -44,7 +44,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("{id:int}")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Attendance))]
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -104,76 +104,67 @@ namespace StudentAssAttSys.API.Controllers
             return Content(HttpStatusCode.Created, attendance);
         }
 
-        // POST: api/Attendance/5/open
+        // POST: api/Attendance/5/Open
         /**
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{id:int}")]
-        [ResponseType(typeof(Attendance))]
+        [Route("{id:int}/Open")]
+        [ResponseType(typeof(HttpStatusCode))]
         [HttpPost]
-        public IHttpActionResult OpenAttendace(int id, [FromBody]Attendance attendance)
+        public IHttpActionResult OpenAttendance(int id, [FromBody]DateTime endDateTime)
         {
-            attendance.Id = id;
+            Attendance attendance = Repository.GetById(id);
 
-            bool result = Repository.Edit(attendance);
+            if (attendance == null)
+            {
+                return Content(HttpStatusCode.NotFound, "");
+            }
 
-            if (!result)
+            if (!Repository.Open(id, endDateTime))
             {
                 return Content(HttpStatusCode.BadRequest, "");
             }
-
-            attendance = Repository.GetById(id);
 
             return Content(HttpStatusCode.OK, attendance);
         }
 
-        // POST: api/Attendance/5/close
+        // POST: api/Attendance/5/Close
         /**
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{id:int}")]
-        [ResponseType(typeof(Attendance))]
+        [Route("{id:int}/Close")]
+        [ResponseType(typeof(HttpStatusCode))]
         [HttpPost]
-        public IHttpActionResult CloseAttendace(int id, [FromBody]Attendance attendance)
+        public IHttpActionResult CloseAttendance(int id)
         {
-            attendance.Id = id;
+            Attendance attendance = Repository.GetById(id);
 
-            bool result = Repository.Edit(attendance);
-
-            if (!result)
+            if (attendance == null)
             {
-                return Content(HttpStatusCode.BadRequest, "");
+                return Content(HttpStatusCode.NotFound, "");
             }
 
-            attendance = Repository.GetById(id);
+            if (!Repository.Close(id))
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
 
             return Content(HttpStatusCode.OK, attendance);
         }
 
-        // POST: api/Attendance/5/present
+        // POST: api/Attendance/5/Present
         /**
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{id:int}")]
-        [ResponseType(typeof(Attendance))]
+        [Route("{id:int}/Present")]
+        [ResponseType(typeof(HttpStatusCode))]
         [HttpPost]
-        public IHttpActionResult Attend(int id, [FromBody]Attendance attendance)
+        public IHttpActionResult Present(int id)
         {
-            attendance.Id = id;
-
-            bool result = Repository.Edit(attendance);
-
-            if (!result)
-            {
-                return Content(HttpStatusCode.BadRequest, "");
-            }
-
-            attendance = Repository.GetById(id);
-
-            return Content(HttpStatusCode.OK, attendance);
+            throw new NotImplementedException();
         }
     }
 }

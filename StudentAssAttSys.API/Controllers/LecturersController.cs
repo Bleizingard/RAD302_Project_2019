@@ -46,7 +46,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("{id:string}")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Lecturer))]
         [HttpGet]
         public IHttpActionResult Get(string id)
         {

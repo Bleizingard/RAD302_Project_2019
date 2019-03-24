@@ -13,7 +13,9 @@ namespace StudentAssAttSys.Core.Core
         [Required]
         public DateTime DateTimeCreation { get; set; }
         [ForeignKey("Result")]
-        public int ResultId { get; set; }
+        public int AssessmentId { get; set; }
+        [ForeignKey("Result")]
+        public string StudentId { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }
 

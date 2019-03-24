@@ -46,7 +46,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("{id:int}")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Assessment))]
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -67,7 +67,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("{id:int}")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Assessment))]
         [HttpPost]
         public IHttpActionResult Post(int id, [FromBody]Assessment assessment)
         {
@@ -91,7 +91,7 @@ namespace StudentAssAttSys.API.Controllers
          * <returns></returns>
          */
         [Route("")]
-        [ResponseType(typeof(HttpStatusCode))]
+        [ResponseType(typeof(Assessment))]
         [HttpPut]
         public IHttpActionResult Put([FromBody]Assessment assessment)
         {
