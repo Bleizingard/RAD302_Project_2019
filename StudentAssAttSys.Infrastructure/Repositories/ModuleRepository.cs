@@ -31,23 +31,37 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public bool Edit(Module o)
         {
-            throw new NotImplementedException();
+            Module module = GetById(o.Id);
+            if (module == null)
+            {
+                return false;
+            }
+
+            module.Id = o.Id;
+            module.Assessments = o.Assessments;
+            module.Attendances = o.Attendances;
+            module.GPAPercentage = o.GPAPercentage;
+            module.Lecturers = o.Lecturers;
+            module.Name = o.Name;
+            module.Students = o.Students;
+            context.SaveChanges();
+            return true;
         }
         /**
          * <summary>Get all <c>Module</c> from the database</summary>
-         * <returns>Returns <c>true</c> if succeed else false</returns>
+         * <returns>Returns an array of all modules</returns>
          */
         public Module[] GetAll()
         {
-            throw new NotImplementedException();
+            return context.Modules.ToArray();
         }
         /**
          * <summary>Get <c>Module</c> from the database</summary>
-         * <returns>Returns a <c>List</c> of <c>Module</c></returns>
+         * <returns>Returns a <c>Module</c> or <c>null</c> if nothing found</returns>
          */
         public Module GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.Modules.FirstOrDefault(m => m.Id == id);
         }
         /**
          * <summary>Remove <c>Module</c> from the database</summary>
@@ -55,7 +69,13 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public bool Remove(Module o)
         {
-            throw new NotImplementedException();
+            Module deletedModule = context.Modules.Remove(o);
+            if (deletedModule == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
