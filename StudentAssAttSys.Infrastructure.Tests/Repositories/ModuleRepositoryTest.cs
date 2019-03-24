@@ -34,7 +34,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [TearDown]
         public void CleanUp()
         {
-            List<Module> modules = Repository.GetAll();
+            Module[] modules = Repository.GetAll();
 
             foreach (Module module in modules)
             {
@@ -58,8 +58,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [Test]
         public void ShouldGetAllModule()
         {
-            List<Module> modules = Repository.GetAll();
-            Assert.That(modules.Count, Is.EqualTo(1));
+            Module[] modules = Repository.GetAll();
+            Assert.That(modules.Length, Is.EqualTo(1));
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [Test]
         public void ShouldDeleteModule()
         {
-            Module module = Repository.GetAll().ToArray()[0];
+            Module module = Repository.GetAll()[0];
 
             bool result = Repository.Remove(module);
 
