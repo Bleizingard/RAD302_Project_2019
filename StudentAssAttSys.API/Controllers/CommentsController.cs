@@ -61,7 +61,7 @@ namespace StudentAssAttSys.API.Controllers
 
 
         // GET: api/Assessment/5/Result/5/Comments
-        [Route("~/api/Assessment/{assessmentId:int}/Result/{studentId:string}/Comments")]
+        [Route("~/api/Assessment/{assessmentId:int}/Result/{studentId}/Comments")]
         [ResponseType(typeof(Comment[]))]
         [HttpGet]
         public IHttpActionResult Get(int assessmentId, string studentId)
@@ -101,7 +101,7 @@ namespace StudentAssAttSys.API.Controllers
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("~/api/Assessment/{id:int}/Result/{studentId:string}/Comment")]
+        [Route("~/api/Assessment/{id:int}/Result/{studentId}/Comment")]
         [ResponseType(typeof(Comment))]
         [HttpPut]
         public IHttpActionResult Put(int assessmentId, string studentId, [FromBody]Comment comment)
