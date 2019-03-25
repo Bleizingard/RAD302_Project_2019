@@ -10,12 +10,14 @@ import Lecturer from "./Components/Lecturer/Lecturer";
 import { CreateAttendance } from "./Components/Lecturer/CreateAttendance";
 import { AddResult } from "./Components/Lecturer/AddResult";
 import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
 
 class App extends Component {
   render() {
     return (
       <Layout>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
         <Route path="/admin" component={Admin} />
         <Route path="/createModule" component={CreateModule} />
         <Route path="/editLecturer" component={EditLecturer} />
