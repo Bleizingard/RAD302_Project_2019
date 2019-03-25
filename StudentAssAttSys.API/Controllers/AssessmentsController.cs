@@ -24,7 +24,7 @@ namespace StudentAssAttSys.API.Controllers
 
         public AssessmentsController()
         {
-            //Repository = new AssessmentRepository();
+            Repository = new AssessmentRepository();
         }
 
         // GET: api/Assessments
