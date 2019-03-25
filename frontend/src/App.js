@@ -13,6 +13,7 @@ import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import FetchData from "./Components/FetchData";
+import CreateAssessment from "./Components/Lecturer/CreateAssessment";
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
         <Route path="/lecturer" component={Lecturer} />
         <Route path="/createAttendance" component={CreateAttendance} />
         <Route path="/addResult" component={AddResult} />
+        <Route path="/createAssessment" component={CreateAssessment} />
       </Layout>
     );
   }
