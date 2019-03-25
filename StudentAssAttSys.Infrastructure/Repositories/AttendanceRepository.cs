@@ -67,6 +67,9 @@ namespace StudentAssAttSys.Infrastructure.Repositories
                 attendance.Module = o.Module;
                 attendance.ModuleId = o.ModuleId;
                 attendance.PresentStudents = o.PresentStudents;
+
+                context.Entry(attendance).State = EntityState.Modified;
+                context.SaveChanges();
                 return true;
             }
             catch (Exception)
