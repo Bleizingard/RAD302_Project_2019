@@ -42,11 +42,11 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [Test]
         public void ShouldAddLecturer()
         {
-            Lecturer lectuer = new Lecturer
+            Lecturer lecturer = new Lecturer
             {
                 FirstName = "ShouldAddLecturerTest"
             };
-            string result = Repository.Add(lectuer);
+            string result = Repository.Add(lecturer);
             Assert.That(result.Length, Is.GreaterThan(0));
         }
 
@@ -69,14 +69,14 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         }
 
         [Test]
-        public void ShouldGetAllComments()
+        public void ShouldGetAllLecturers()
         {
             Lecturer[] lecturers = Repository.GetAll();
             Assert.That(lecturers.Length, Is.EqualTo(1));
         }
 
         [Test]
-        public void ShouldGetByCommentId()
+        public void ShouldGetByLecturerId()
         {
             string lecturerId = Repository.Add(new Lecturer
             {
@@ -87,7 +87,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         }
 
         [Test]
-        public void ShouldDeleteComment()
+        public void ShouldDeleteLecturer()
         {
             Lecturer lecturer = Repository.GetAll()[0];
             string lecturerId = lecturer.Id;
