@@ -5,22 +5,37 @@ export class AddResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //comes from API
+      oldGrade: "89",
+      //
       studentNumber: "",
-      result: ""
+      //new
+      newGrade: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ result: event.target.value });
-  }
+  handleChange = e => {
+    let newState = {};
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  };
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit = async e => {
+    if (
+      this.state.newGrade > 0 &&
+      this.state.newGrade !== this.state.oldGrade
+    ) {
+      this.setState({
+        oldGrade: this.state.newGrade
+      });
+    }
+
+    e.preventDefault();
     console.log(this.state);
-  }
+  };
 
   render() {
     return (
@@ -43,36 +58,52 @@ export class AddResult extends Component {
           <table className="table table-hover table-sm">
             <thead className="thead-dark">
               <tr>
-                <th scope="col-sm-6">Student Number</th>
-                <th scope="col-sm-3">Input Result</th>
-                <th scope="col-sm-3">Apply</th>
+                <th scope="col-sm-4">Student Number</th>
+                <th scope="col-sm-2" className="text-center">
+                  Grade
+                </th>
+                <th scope="col-sm-2" className="text-center">
+                  Edit Grade
+                </th>
+                <th scope="col-sm-3" className="text-center">
+                  Add New Grade
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>S00184388</td>
+                <td className="text-center">{this.state.oldGrade}</td>
                 <td>
-                  <div className="form-group input-group-sm col-sm-6 ">
+                  <div className="form-group input-group-sm text-center ">
                     <input
                       className="form-control"
-                      name="result"
+                      name="newGrade"
                       type="number"
                       id="result"
                       onChange={this.handleChange}
-                      value={this.state.result}
-                      required
-                      autoFocus
+                      value={this.state.newGrade}
                     />
                   </div>
                 </td>
                 <td>
-                  <div
-                    className="btn btn-primary btn-sm"
-                    type="submit"
-                    onClick={this.handleSubmit}
-                  >
-                    Add Result
-                  </div>
+                  {this.state.newGrade === this.state.oldGrade ? (
+                    <div
+                      className="btn btn-danger btn-sm d-flex justify-content-center"
+                      type="submit"
+                      onClick={this.handleSubmit}
+                    >
+                      Edit Result
+                    </div>
+                  ) : (
+                    <div
+                      className="btn btn-primary btn-sm d-flex justify-content-center"
+                      type="submit"
+                      onClick={this.handleSubmit}
+                    >
+                      Add New Result
+                    </div>
+                  )}
                 </td>
               </tr>
             </tbody>
