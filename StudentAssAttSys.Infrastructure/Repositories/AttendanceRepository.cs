@@ -103,8 +103,8 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         public bool Open(int id, DateTime startDateTime, DateTime endDateTime)
         {
             Attendance attendance = context.Attendances.FirstOrDefault(a =>
-                a.Id == id && DateTime.Compare(startDateTime, a.DateTimeAttendanceStart) < 0 &&
-                DateTime.Compare(a.DateTimeAttendanceEnd, endDateTime) < 0);
+                a.Id == id && DateTime.Compare(startDateTime, a.DateTimeAttendanceStart) >= 0 &&
+                DateTime.Compare(a.DateTimeAttendanceEnd, endDateTime) >= 0);
             if (attendance == null)
             {
                 return false;
@@ -120,7 +120,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         public bool Open(int id, DateTime endDateTime)
         {
             Attendance attendance = context.Attendances.FirstOrDefault(a =>
-                a.Id == id && DateTime.Compare(a.DateTimeAttendanceEnd, endDateTime) < 0);
+                a.Id == id && DateTime.Compare(a.DateTimeAttendanceEnd, endDateTime) >= 0);
             if (attendance == null)
             {
                 return false;
