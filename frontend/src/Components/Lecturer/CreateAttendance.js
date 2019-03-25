@@ -5,32 +5,23 @@ export class CreateAttendance extends Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
       date: "",
       startTime: "",
-      endTime: "",
-=======
-      module: "",
-      startDate: "",
-      startTime: "",
-      endDate: "",
       endTime: ""
->>>>>>> 033f7d3e70ffd8730901a3715697e8ce2f85a7f1
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-<<<<<<< HEAD
   handleChange(event) {
     var d = new Date();
     var h = d.getUTCHours();
     var m = d.getUTCMinutes();
 
-    var d = h + ":" + m
+    var d = h + ":" + m;
     this.setState({ endTime: event.target.value });
-    this.setState({date: new Date().toDateString()});
+    this.setState({ date: new Date().toDateString() });
     this.setState({ startTime: d });
   }
 
@@ -50,31 +41,11 @@ export class CreateAttendance extends Component {
     });
     event.preventDefault();
   }
-=======
-  handleChange = e => {
-    let newState = {};
-    newState[e.target.name] = e.target.value;
-    this.setState(newState);
-    console.log(this.state.newState);
-  };
-
-  handleSubmit = async e => {
-    e.preventDefault();
-    console.log(this.state);
-    alert("Attendance added");
-  };
-
->>>>>>> 033f7d3e70ffd8730901a3715697e8ce2f85a7f1
   render() {
     const modules = ["Module 1", "Module 2", "Module 3", "Module 4"];
     const options = modules.map(opt => <option key={opt}>{opt}</option>);
     return (
       <div className="col-sm-6 py-2">
-<<<<<<< HEAD
-            <h3>Choose end time for attendance</h3>
-            <input type="time" onChange={this.handleChange} className="form-control"></input>
-            <input type="button" onClick={this.handleSubmit} value="Submit Attendance" className="btn btn-sm btn-primary"></input>
-=======
         <h5>Create new Attendance</h5>
         <hr />
         <form onSubmit={this.handleSubmit}>
@@ -147,7 +118,6 @@ export class CreateAttendance extends Component {
             </button>
           </div>
         </form>
->>>>>>> 033f7d3e70ffd8730901a3715697e8ce2f85a7f1
       </div>
     );
   }

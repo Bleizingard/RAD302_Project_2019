@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../Student/Student.css";
 
 export class Student extends Component {
@@ -12,12 +13,12 @@ export class Student extends Component {
         <h5>Welcome,Student!</h5>
         <h6>Details</h6>
 
-        <section id="tabs" className="project-tab">
-          <div className="row py-4">
+        <section id="tabs" className="project-tab ">
+          <div className="row py-4 ">
             <div className="col-sm-12">
               <nav>
                 <div
-                  className="nav nav-tabs nav-fill"
+                  className="nav nav-tabs nav-fill ml-3"
                   id="nav-tab"
                   role="tablist"
                 >
@@ -63,41 +64,40 @@ export class Student extends Component {
                   role="tabpanel"
                   aria-labelledby="assessments-tab"
                 >
-                  <div className="container py-3">
-                    <div className="form-group input-group-sm col-sm-4">
-                      <select
-                        name="timing"
-                        className="form-control"
-                        defaultValue={""}
-                        onChange={this.handleChange}
-                      >
-                        <option value="" disabled hidden>
-                          Done/ToBeDone
-                        </option>
-                        {options}
-                      </select>
-                    </div>
-                    <table class="table table-sm pt-3">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Assessment</th>
-                          <th scope="col">Module Name</th>
-                          <th scope="col">Start Date</th>
-                          <th scope="col">Deadline</th>
-                          <th scope="col">GPA</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div className="form-group input-group-sm col-sm-4 py-2">
+                    <label htmlFor="timing">Filtered By</label>
+                    <select
+                      name="timing"
+                      className="form-control"
+                      defaultValue={""}
+                      onChange={this.handleChange}
+                    >
+                      <option value="" disabled hidden>
+                        Done/ToBeDone
+                      </option>
+                      {options}
+                    </select>
                   </div>
+                  <table className="table table-sm pt-3 ml-3">
+                    <thead className="thead-dark text-center">
+                      <tr>
+                        <th scope="col-sm-2">Assessment</th>
+                        <th scope="col">Module Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">GPA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="text-center">
+                        <th scope="row">1</th>
+                        <td>RAD</td>
+                        <td>18/03/2019</td>
+                        <td>25/03/2019</td>
+                        <td>-</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div
                   className="tab-pane"
@@ -105,21 +105,23 @@ export class Student extends Component {
                   role="tabpanel"
                   aria-labelledby="modules-tab"
                 >
-                  <table class="table table-sm pt-3">
-                    <thead class="thead-dark">
+                  <table className="table table-sm pt-3">
+                    <thead className="thead-dark">
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Module Name</th>
                         <th scope="col">Lecturer</th>
-                        <th scope="col">Grade</th>
+                        <th scope="col">Details</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <td>RAD</td>
+                        <td>Paul Powell</td>
+                        <td>
+                          <Link to="/moduleDetails">View Details</Link>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

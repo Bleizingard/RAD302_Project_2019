@@ -12,8 +12,8 @@ import AddResult from "./Components/Lecturer/AddResult";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-import FetchData from "./Components/FetchData";
 import CreateAssessment from "./Components/Lecturer/CreateAssessment";
+import ModuleDetails from "./Components/Student/moduleDetails";
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route path="/fetchData" component={FetchData} />
+        <Route path="/moduleDetails" component={ModuleDetails} />
         <Route path="/admin" component={Admin} />
         <Route path="/createModule" component={CreateModule} />
         <Route path="/editLecturer" component={EditLecturer} />
