@@ -10,7 +10,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
     [TestFixture]
     public class ModuleRepositoryTest
     {
-        private ModuleRepository Repository = new ModuleRepository();
+        private ModuleRepository Repository;
 
         [OneTimeSetUp]
         public void InitialeSetup()
@@ -87,10 +87,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Assert.That(result, Is.EqualTo(true));
                 Assert.That(module.Name, Is.EqualTo("ShouldEditModuleTestEdited"));
-            });
-
-            
-
+            });        
         }
 
         [Test]
@@ -104,8 +101,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             //Better to double check
             Assert.Multiple(() =>
             {
-                Assert.That(result, Is.EqualTo(true));
-                Assert.That(Repository.GetById(moduleId), null);
+                Assert.IsTrue(result);
+                Assert.IsNull(Repository.GetById(moduleId));
             });
             
         }
