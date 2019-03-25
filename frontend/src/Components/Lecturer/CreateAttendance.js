@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class CreateAttendance extends Component {
   displayName = CreateAttendance.name;
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
+      module: "",
+      startDate: "",
       startTime: "",
+      endDate: "",
       endTime: ""
     };
 
@@ -14,39 +17,25 @@ export class CreateAttendance extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    var d = new Date();
-    var h = d.getUTCHours();
-    var m = d.getUTCMinutes();
+  handleChange = e => {
+    let newState = {};
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  };
 
-    var d = h + ":" + m;
-    this.setState({ endTime: event.target.value });
-    this.setState({ date: new Date().toDateString() });
-    this.setState({ startTime: d });
-  }
+  handleSubmit = async e => {
+    alert("new assessment added");
+    e.preventDefault();
+    console.log(this.state);
+  };
 
-  handleSubmit(event) {
-    alert(
-      "An attendance was submitted: " +
-        this.state.startTime +
-        " " +
-        this.state.endTime +
-        " " +
-        this.state.date
-    );
-    this.setState({
-      date: "",
-      startTime: "",
-      endTime: ""
-    });
-    event.preventDefault();
-  }
   render() {
     const modules = ["Module 1", "Module 2", "Module 3", "Module 4"];
     const options = modules.map(opt => <option key={opt}>{opt}</option>);
     return (
       <div className="col-sm-6 py-2">
-        <h5>Create new Attendance</h5>
+        <h5>Create attendance</h5>
+        <Link to="/lecturer">Go Back</Link>
         <hr />
         <form onSubmit={this.handleSubmit}>
           <div className="form-group input-group-sm ">
@@ -113,7 +102,7 @@ export class CreateAttendance extends Component {
             </div>
           </div>
           <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-sm btn-primary">
+            <button type="submit" className="btn btn-sm btn-primary col-sm-4">
               Submit
             </button>
           </div>

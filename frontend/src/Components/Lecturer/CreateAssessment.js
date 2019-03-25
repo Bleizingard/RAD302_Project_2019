@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class CreateAssessment extends Component {
   displayName = CreateAssessment.name;
@@ -35,6 +36,7 @@ export class CreateAssessment extends Component {
     return (
       <div className="col-sm-6 py-2">
         <h5>Create new assessment</h5>
+        <Link to="/lecturer">Go Back</Link>
         <hr />
         <form onSubmit={this.handleSubmit}>
           <div className="form-group input-group-sm ">
