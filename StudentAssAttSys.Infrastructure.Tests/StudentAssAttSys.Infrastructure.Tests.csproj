@@ -75,6 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AssessmentRepositoryTest.cs" />
     <Compile Include="Repositories\AttendanceRepositoryTest.cs" />
+    <Compile Include="Repositories\CommentRepositoryTest.cs" />
     <Compile Include="Repositories\ModuleRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
