@@ -16,7 +16,7 @@ export class CreateAttendance extends Component {
 
   handleChange(event) {
     this.setState({ endTime: event.target.value });
-    this.setState({ startTime: Date.now().toString() });
+    this.setState({ startTime: Date.now() });
   }
 
   handleSubmit(event) {
@@ -31,7 +31,9 @@ export class CreateAttendance extends Component {
   render() {
     return (
       <div>
-        <h3>Choose end time for attendance</h3>
+            <h3>Choose end time for attendance</h3>
+            <input type="datetime-local" onChange={this.handleChange}></input>
+            <input type="button" onClick={this.handleSubmit}></input>
       </div>
     );
   }

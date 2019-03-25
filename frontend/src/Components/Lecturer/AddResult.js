@@ -39,7 +39,6 @@ export class AddResult extends Component {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
               <td>studentnumber</td>
               <td>
                 <input

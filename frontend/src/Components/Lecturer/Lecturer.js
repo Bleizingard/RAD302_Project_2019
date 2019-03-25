@@ -38,18 +38,18 @@ export class Lecturer extends Component {
               <th scope="row">1</th>
               <td>RAD</td>
               <td>
-                <Link to="/createAttendance" className="btn btn-primary btn-sm">
+                <Link to="/CreateAttendance" className="btn btn-primary btn-sm">
                   Create Attendance
                 </Link>
               </td>
 
               <td>
-                <Link to="/createAssessment" className="btn btn-primary btn-sm">
+                <Link to="/CreateAssessment" className="btn btn-primary btn-sm">
                   Create Assessment
                 </Link>
               </td>
               <td>
-                <Link to="/addResult" className="btn btn-primary btn-sm">
+                <Link to="/AddResult" className="btn btn-primary btn-sm">
                   Add Result
                 </Link>
               </td>
