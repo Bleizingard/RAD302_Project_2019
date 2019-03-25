@@ -81,11 +81,11 @@ export class Student extends Component {
                       <thead class="thead-dark">
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Assessment Name</th>
+                          <th scope="col">Assessment</th>
                           <th scope="col">Module Name</th>
                           <th scope="col">Start Date</th>
                           <th scope="col">Deadline</th>
-                          <th scope="col">Grade</th>
+                          <th scope="col">GPA</th>
                         </tr>
                       </thead>
                       <tbody>
