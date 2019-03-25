@@ -5,6 +5,7 @@ import { Layout } from "./Components/Layout";
 import Admin from "./Components/Admin/Admin.js";
 import CreateModule from "./Components/Admin/createModule";
 import EditLecturer from "./Components/Admin/editLecturer";
+import Student from "./Components/Student/Student";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <Route path="/admin" component={Admin} />
         <Route path="/createModule" component={CreateModule} />
         <Route path="/editLecturer" component={EditLecturer} />
+        <Route path="/student" component={Student} />
       </Layout>
     );
   }
