@@ -1,5 +1,6 @@
 ﻿using StudentAssAttSys.Core.Core;
 using StudentAssAttSys.Core.IRepositories;
+using StudentAssAttSys.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace StudentAssAttSys.API.Controllers
 
         public AttendanceController()
         {
-            //Repository = new AttendanceRepository();
+            Repository = new AttendanceRepository();
         }
 
         // GET: api/Attendances
