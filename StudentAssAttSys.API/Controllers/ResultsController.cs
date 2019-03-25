@@ -61,7 +61,7 @@ namespace StudentAssAttSys.API.Controllers
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{assessmentId:int}/{studentId:string}")]
+        [Route("{assessmentId:int}/{studentId}")]
         [ResponseType(typeof(Result))]
         [HttpGet]
         public IHttpActionResult Get(int assessmentId, string studentId)
@@ -103,7 +103,7 @@ namespace StudentAssAttSys.API.Controllers
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{assessmentId:int}/{studentId:string}")]
+        [Route("{assessmentId:int}/{studentId}")]
         [ResponseType(typeof(Result))]
         [HttpPost]
         public IHttpActionResult Post(int assessmentId, string studentId, [FromBody]Result result)
