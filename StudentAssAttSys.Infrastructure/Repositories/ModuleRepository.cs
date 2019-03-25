@@ -20,7 +20,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
 
         /**
          * <summary>Add <c>Module</c> in the database</summary>
-         * <returns>Returns the ID of the new Module</returns>
+         * <returns>Returns the <c>ID</c> of the new Module or <c>-1</c> if it fails</returns>
          */
 
         public int Add(Module o)
@@ -41,7 +41,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
 
         /**
          * <summary>Edit <c>Module</c> in the database</summary>
-         * <returns>Returns true if succeed else false</returns>
+         * <returns>Returns <c>true</c> if succeed or <c>false</c> if it fails</returns>
          */
         public bool Edit(Module o)
         {
@@ -80,6 +80,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             return context.Modules.ToArray();
         }
+
         /**
          * <summary>Get <c>Module</c> from the database</summary>
          * <returns>Returns a <c>Module</c> or <c>null</c> if nothing found</returns>
@@ -88,6 +89,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             return context.Modules.FirstOrDefault(m => m.Id == id);
         }
+
         /**
          * <summary>Remove <c>Module</c> from the database</summary>
          * <returns>Returns <c>true</c> if succeed else false</returns>
@@ -96,7 +98,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                context.Entry(o).State = EntityState.Added;
+                context.Entry(o).State = EntityState.Deleted;
                 context.SaveChanges();
 
                 return true;
