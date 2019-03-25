@@ -7,7 +7,7 @@ export class Admin extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ width: "100%", padding: "0%" }}>
         <h5>Hello, Admin!</h5>
         <hr />
         <h6>Modules List</h6>
@@ -20,7 +20,7 @@ export class Admin extends Component {
             </button>{" "}
           </Link>
         </div>
-        <table className="table table-hover">
+        <table className="table table-hover table-sm">
           <thead className="thead-dark text-center">
             <tr>
               <th scope="col">Module ID</th>

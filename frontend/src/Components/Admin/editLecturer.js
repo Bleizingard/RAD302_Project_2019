@@ -25,15 +25,15 @@ export class EditLecturer extends Component {
     const options = lecturers.map(opt => <option key={opt}>{opt}</option>);
     return (
       <div>
-        <h3>Assign a new Lecturer for this module</h3>
+        <h5>Assign a new Lecturer for this module</h5>
         <hr />
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="py-3">
           <div className="row">
             <div className="form-group input-group-sm col-sm-4">
-              <label>Module Name:</label>
-              <p>Module 1</p>
-
-              <label htmlFor="lecturers">Choose Lecturer</label>
+              <h6>
+                <b>Module Name:</b> Module 2
+              </h6>
+              <h6 className="pt-3">Choose Lecturer</h6>
               <select
                 id="lecturer"
                 name="lecturer"
@@ -49,15 +49,14 @@ export class EditLecturer extends Component {
             </div>
           </div>
         </form>
-        <div className="row">
-          <button
-            type="submit"
-            className="btn btn-sm btn-primary "
-            onClick={this.onChange}
-          >
-            Save Changes
-          </button>
-        </div>
+
+        <button
+          type="submit"
+          className="btn btn-sm btn-primary"
+          onClick={this.onChange}
+        >
+          Save Changes
+        </button>
       </div>
     );
   }

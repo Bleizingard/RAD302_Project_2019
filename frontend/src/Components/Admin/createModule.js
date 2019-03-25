@@ -70,14 +70,14 @@ export class CreateModule extends Component {
           <div className="col-sm-4">
             <button
               type="submit"
-              className="btn btn-sm btn-primary"
+              className="btn btn-sm btn-primary col-sm-6"
               onClick={this.onChange}
             >
               Save Changes
             </button>
           </div>
           <div className="col-sm-4">
-            <Link to="/admin" className="btn btn-primary btn-sm">
+            <Link to="/admin" className="btn btn-primary btn-sm col-sm-6">
               Go to Admin
             </Link>
           </div>
