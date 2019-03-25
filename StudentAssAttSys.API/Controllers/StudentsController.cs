@@ -45,7 +45,7 @@ namespace StudentAssAttSys.API.Controllers
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{id:string}")]
+        [Route("{id}")]
         [ResponseType(typeof(Student))]
         [HttpGet]
         public IHttpActionResult Get(string id)
@@ -66,7 +66,7 @@ namespace StudentAssAttSys.API.Controllers
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{id:string}")]
+        [Route("{id}")]
         [ResponseType(typeof(Student))]
         [HttpPost]
         public IHttpActionResult Post(string id, [FromBody]Student student)
@@ -112,7 +112,7 @@ namespace StudentAssAttSys.API.Controllers
          * <summary></summary>
          * <returns></returns>
          */
-        [Route("{id:string}")]
+        [Route("{id}")]
         [ResponseType(typeof(HttpStatusCode))]
         [HttpDelete]
         public IHttpActionResult Delete(string id)
