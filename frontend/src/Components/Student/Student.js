@@ -2,12 +2,27 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../Student/Student.css";
 
+import Calendar from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+const localizer = Calendar.momentLocalizer(moment);
+
 export class Student extends Component {
   displayName = Student.name;
 
   render() {
     const timing = ["Done", "To Be Done"];
     const options = timing.map(opt => <option key={opt}>{opt}</option>);
+
+    var events = [
+      {
+        start: new Date(),
+        end: new Date(moment().add(1, "days")),
+        title: "RAD Assessment"
+      }
+    ];
+
     return (
       <div className="container-fluid" style={{ width: "100%" }}>
         <h5>Welcome,Student!</h5>
@@ -53,7 +68,7 @@ export class Student extends Component {
                     aria-controls="timetable"
                     aria-selected="false"
                   >
-                    Timetable
+                    Assessments Timetable
                   </div>
                 </div>
               </nav>
@@ -85,7 +100,7 @@ export class Student extends Component {
                         <th scope="col">Module Name</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
-                        <th scope="col">GPA</th>
+                        <th scope="col">Grade</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -111,6 +126,7 @@ export class Student extends Component {
                         <th scope="col">#</th>
                         <th scope="col">Module Name</th>
                         <th scope="col">Lecturer</th>
+                        <th scope="col">GPA</th>
                         <th scope="col">Details</th>
                       </tr>
                     </thead>
@@ -119,6 +135,7 @@ export class Student extends Component {
                         <th scope="row">1</th>
                         <td>RAD</td>
                         <td>Paul Powell</td>
+                        <td>-</td>
                         <td>
                           <Link to="/moduleDetails">View Details</Link>
                         </td>
@@ -132,7 +149,15 @@ export class Student extends Component {
                   role="tabpanel"
                   aria-labelledby="timetable-tab"
                 >
-                  timetable
+                  <div>
+                    <Calendar
+                      localizer={localizer}
+                      defaultDate={new Date()}
+                      defaultView="month"
+                      events={events}
+                      style={{ height: "80vh" }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
