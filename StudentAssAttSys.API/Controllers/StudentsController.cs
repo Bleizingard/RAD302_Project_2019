@@ -24,7 +24,7 @@ namespace StudentAssAttSys.API.Controllers
 
         public StudentsController()
         {
-            //Repository = new StudentRepository();
+            Repository = new StudentRepository();
         }
 
         // GET: api/Students
