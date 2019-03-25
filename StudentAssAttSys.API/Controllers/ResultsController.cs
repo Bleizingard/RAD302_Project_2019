@@ -1,5 +1,6 @@
 ﻿using StudentAssAttSys.Core.Core;
 using StudentAssAttSys.Core.IRepositories;
+using StudentAssAttSys.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace StudentAssAttSys.API.Controllers
 
         public ResultsController()
         {
-            //Repository = new ResultRepository();
+            Repository = new ResultRepository();
         }
 
         // GET: api/Results
