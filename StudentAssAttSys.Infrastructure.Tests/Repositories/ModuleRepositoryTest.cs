@@ -80,7 +80,16 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
 
             bool result = Repository.Edit(module);
 
-            Assert.That(result, Is.EqualTo(true));
+            module = Repository.GetById(moduleId);
+
+            //Better to double check
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.EqualTo(true));
+                Assert.That(module.Name, Is.EqualTo("ShouldEditModuleTestEdited"));
+            });
+
+            
 
         }
 
@@ -89,9 +98,16 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Module module = Repository.GetAll()[0];
 
+            int moduleId = module.Id;
             bool result = Repository.Remove(module);
 
-            Assert.That(result, Is.EqualTo(true));
+            //Better to double check
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.EqualTo(true));
+                Assert.That(Repository.GetById(moduleId), null);
+            });
+            
         }
     }
 }
