@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentAssAttSys.API\StudentAssAttSys.API.csproj">
-      <Project>{FDA03BC4-F602-41FB-ADBF-BAE28032B169}</Project>
+      <Project>{d1fe2b48-90c1-43d1-8098-8813b75432d9}</Project>
       <Name>StudentAssAttSys.API</Name>
     </ProjectReference>
   </ItemGroup>
