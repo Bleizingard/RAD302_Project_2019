@@ -26,8 +26,7 @@ export class CreateAssessment extends Component {
   handleSubmit = async e => {
     alert("new assessment added");
     e.preventDefault();
-    console.log(this.state.startDate);
-    console.log(this.state.endDate);
+    console.log(this.state);
   };
 
   render() {
@@ -54,7 +53,7 @@ export class CreateAssessment extends Component {
             </select>
           </div>
           <div className="row">
-            <div className="form-group input-group-sm col-sm-8 ">
+            <div className="form-group input-group-sm col-sm-6 ">
               <label htmlFor="startDate">Start Date</label>
               <input
                 className="form-control"
@@ -65,7 +64,7 @@ export class CreateAssessment extends Component {
                 value={this.state.startDate}
               />
             </div>
-            <div className="form-group input-group-sm col-sm-4 ">
+            <div className="form-group input-group-sm col-sm-6 ">
               <label htmlFor="startTime">Time</label>
               <input
                 className="form-control"
@@ -78,7 +77,7 @@ export class CreateAssessment extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="form-group input-group-sm col-sm-8 ">
+            <div className="form-group input-group-sm col-sm-6 ">
               <label htmlFor="endDate">End Date</label>
               <input
                 className="form-control"
@@ -89,7 +88,7 @@ export class CreateAssessment extends Component {
                 value={this.state.endDate}
               />
             </div>
-            <div className="form-group input-group-sm col-sm-4 ">
+            <div className="form-group input-group-sm col-sm-6 ">
               <label htmlFor="endTime">End Time</label>
               <input
                 className="form-control"

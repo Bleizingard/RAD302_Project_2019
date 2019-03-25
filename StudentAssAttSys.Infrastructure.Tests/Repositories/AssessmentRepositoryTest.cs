@@ -17,7 +17,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [OneTimeSetUp]
         public void InitialSetup()
         {
-            Repository = new AssessmentRepository();;
+            Repository = new AssessmentRepository();
         }
 
         [SetUp]

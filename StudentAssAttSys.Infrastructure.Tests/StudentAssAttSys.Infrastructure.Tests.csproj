@@ -75,7 +75,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AssessmentRepositoryTest.cs" />
     <Compile Include="Repositories\AttendanceRepositoryTest.cs" />
+    <Compile Include="Repositories\CommentRepositoryTest.cs" />
+    <Compile Include="Repositories\LecturerRepositoryTest.cs" />
     <Compile Include="Repositories\ModuleRepositoryTest.cs" />
+    <Compile Include="Repositories\ResultRepositoryTest.cs" />
+    <Compile Include="Repositories\StudentRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
