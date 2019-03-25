@@ -27,7 +27,7 @@ export class Lecturer extends Component {
                                 <Link to="/CreateAttendance" className="btn btn-primary btn-sm">
                                     Create Attendance
                 </Link>
-                                <td><Link to="CreateAssessment" className="btn btn-primary btn-sm">
+                                <td><Link to="/CreateAssessment" className="btn btn-primary btn-sm">
                                     Create Assessment
                                 </Link></td>
                             </td>
