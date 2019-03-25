@@ -23,7 +23,7 @@ namespace StudentAssAttSys.API.Controllers
 
         public CommentsController()
         {
-            //Repository = new CommentRepository();
+            Repository = new CommentRepository();
         }
 
         // GET: api/Comments
