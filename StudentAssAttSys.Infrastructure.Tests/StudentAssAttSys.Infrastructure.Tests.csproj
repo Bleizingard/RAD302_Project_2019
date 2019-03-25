@@ -78,6 +78,7 @@
     <Compile Include="Repositories\CommentRepositoryTest.cs" />
     <Compile Include="Repositories\LecturerRepositoryTest.cs" />
     <Compile Include="Repositories\ModuleRepositoryTest.cs" />
+    <Compile Include="Repositories\StudentRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
