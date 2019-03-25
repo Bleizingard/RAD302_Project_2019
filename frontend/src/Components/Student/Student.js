@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../Student/Student.css";
-import { Link } from "react-router-dom";
 
 export class Student extends Component {
   displayName = Student.name;

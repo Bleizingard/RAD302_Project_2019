@@ -7,7 +7,7 @@ export class Admin extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", padding: "0%" }}>
+      <div>
         <h5>Hello, Admin!</h5>
         <hr />
         <h6>Modules List</h6>

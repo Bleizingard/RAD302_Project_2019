@@ -7,11 +7,12 @@ import CreateModule from "./Components/Admin/createModule";
 import EditLecturer from "./Components/Admin/editLecturer";
 import Student from "./Components/Student/Student";
 import Lecturer from "./Components/Lecturer/Lecturer";
-import { CreateAttendance } from "./Components/Lecturer/CreateAttendance";
-import { AddResult } from "./Components/Lecturer/AddResult";
+import CreateAttendance from "./Components/Lecturer/CreateAttendance";
+import AddResult from "./Components/Lecturer/AddResult";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import FetchData from "./Components/FetchData";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route path="/fetchData" component={FetchData} />
         <Route path="/admin" component={Admin} />
         <Route path="/createModule" component={CreateModule} />
         <Route path="/editLecturer" component={EditLecturer} />

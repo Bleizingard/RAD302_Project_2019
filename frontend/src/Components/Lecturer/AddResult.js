@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 export class AddResult extends Component {
   constructor(props) {
@@ -59,3 +58,5 @@ export class AddResult extends Component {
     );
   }
 }
+
+export default AddResult;
