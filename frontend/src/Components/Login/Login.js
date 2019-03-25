@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../Login/Login.css";
 export class Login extends Component {
   displayName = Login.name;
@@ -43,6 +44,10 @@ export class Login extends Component {
               Sign in
             </button>
             <p className="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+            <p className="text center mb-3 font-weight-normal">
+              Do you not have any account yet?
+            </p>
+            <Link to="/register">Register here</Link>
           </form>
         </div>
       </div>

@@ -11,6 +11,7 @@ import { CreateAttendance } from "./Components/Lecturer/CreateAttendance";
 import { AddResult } from "./Components/Lecturer/AddResult";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
       <Layout>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route path="/admin" component={Admin} />
         <Route path="/createModule" component={CreateModule} />
         <Route path="/editLecturer" component={EditLecturer} />
