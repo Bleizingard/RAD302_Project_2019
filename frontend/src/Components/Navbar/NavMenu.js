@@ -20,24 +20,24 @@ export class NavMenu extends Component {
           <span className="navbar-toggler-icon" />
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+        <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
               <Link to="/" className="nav-link">
                 Home<span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/student" className="nav-link">
                 Student<span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/lecturer" className="nav-link">
                 Lecturer<span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/admin" className="nav-link">
                 Admin<span className="sr-only">(current)</span>
               </Link>

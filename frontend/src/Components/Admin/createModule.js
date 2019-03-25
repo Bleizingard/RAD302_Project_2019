@@ -15,13 +15,13 @@ export class CreateModule extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChange(e) {
+    this.setState({ value: e.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit(e) {
     alert("A name was submitted: " + this.state.value);
-    event.preventDefault();
+    e.preventDefault();
   }
 
   render() {
