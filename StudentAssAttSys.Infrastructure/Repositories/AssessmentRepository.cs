@@ -25,7 +25,6 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-
                 o.Id = 0;
                 context.Entry(o).State = EntityState.Added;
                 context.SaveChanges();
