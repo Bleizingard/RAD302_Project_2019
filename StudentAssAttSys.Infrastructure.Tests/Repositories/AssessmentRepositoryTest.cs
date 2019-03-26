@@ -50,7 +50,9 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
                 Repository.Remove(assessment);
             }
 
-            
+            InfrastructureTestsSeed.RemoveModules(Context);
+            InfrastructureTestsSeed.RemoveLecturers(Context);
+            InfrastructureTestsSeed.RemoveStudents(Context);
         }
 
         [Test]

@@ -143,9 +143,11 @@ namespace StudentAssAttSys.Infrastructure.Tests
                     module.Lecturers.Add(db.Lecturers.FirstOrDefault());
                     module.Students.Add(db.Students.FirstOrDefault());
                 }
-
+                db.Entry(module).State = EntityState.Modified;
                 n++;
             }
+
+            
             db.SaveChanges();
         }
     }
