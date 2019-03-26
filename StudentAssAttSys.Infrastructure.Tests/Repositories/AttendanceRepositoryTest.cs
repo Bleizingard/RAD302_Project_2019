@@ -14,6 +14,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
     public class AttendanceRepositoryTest
     {
         private AttendanceRepository Repository;
+        private StudentAssAttSysContext dbContext = new StudentAssAttSysContext();
 
         [OneTimeSetUp]
         public void InitialSetup()
@@ -31,6 +32,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
                 LecturerId = 1,
                 ModuleId = 1
             });
+            InfrastructureTestsSeed.SeedLecturers(dbContext);
+            InfrastructureTestsSeed.SeedStudents(dbContext);
         }
 
         [TearDown]
@@ -41,6 +44,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Repository.Remove(attendance);
             }
+            InfrastructureTestsSeed.RemoveLecturers(dbContext);
+            InfrastructureTestsSeed.RemoveStudents(dbContext);
         }
 
         [Test]
@@ -50,8 +55,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("03/03/2019"),
                 DateTimeLectureEnd = DateTime.Parse("03/03/2019"),
-                LecturerId = 2,
-                ModuleId = 2
+                LecturerId = 1,
+                ModuleId = 1
             };
             int result = Repository.Add(attendance);
             Assert.That(result, Is.GreaterThan(0));
@@ -92,8 +97,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("04/04/2019"),
                 DateTimeLectureEnd = endDateTime,
-                LecturerId = 4,
-                ModuleId = 4
+                LecturerId = 1,
+                ModuleId = 1
             });
             Attendance attendance = Repository.GetById(attendanceId);
             Assert.That(attendance.DateTimeLectureEnd, Is.EqualTo(endDateTime).Within(1).Minutes);
