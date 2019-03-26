@@ -39,7 +39,7 @@ export class AddResult extends Component {
 
   render() {
     return (
-      <div className="py-3">
+      <div className="py-5">
         <h5>Add results for students</h5>
         <hr />
         <div className="row">
@@ -75,21 +75,34 @@ export class AddResult extends Component {
                 <td>S00184388</td>
                 <td className="text-center">{this.state.oldGrade}</td>
                 <td>
-                  <div className="form-group input-group-sm text-center ">
-                    <input
-                      className="form-control"
-                      name="newGrade"
-                      type="number"
-                      id="result"
-                      onChange={this.handleChange}
-                      value={this.state.newGrade}
-                    />
-                  </div>
+                  {this.state.newGrade === this.state.oldGrade ? (
+                    <div className="form-group input-group-sm text-center disabled ">
+                      <input
+                        className="form-control"
+                        name="newGrade"
+                        type="number"
+                        id="result"
+                        onChange={this.handleChange}
+                        value={this.state.newGrade}
+                      />
+                    </div>
+                  ) : (
+                    <div className="form-group input-group-sm text-center ">
+                      <input
+                        className="form-control"
+                        name="newGrade"
+                        type="number"
+                        id="result"
+                        onChange={this.handleChange}
+                        value={this.state.newGrade}
+                      />
+                    </div>
+                  )}
                 </td>
                 <td>
                   {this.state.newGrade === this.state.oldGrade ? (
                     <div
-                      className="btn btn-danger btn-sm d-flex justify-content-center"
+                      className="btn btn-danger btn-sm d-flex justify-content-center disabled"
                       type="submit"
                       onClick={this.handleSubmit}
                     >
@@ -101,7 +114,7 @@ export class AddResult extends Component {
                       type="submit"
                       onClick={this.handleSubmit}
                     >
-                      Add New Result
+                      Edit Result
                     </div>
                   )}
                 </td>

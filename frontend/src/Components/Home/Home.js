@@ -1,57 +1,37 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class Home extends Component {
   displayName = Home.name;
 
   render() {
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li>
-            <a href="https://get.asp.net/">ASP.NET Core</a> and{" "}
-            <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">
-              C#
-            </a>{" "}
-            for cross-platform server-side code
-          </li>
-          <li>
-            <a href="https://facebook.github.io/react/">React</a> for
-            client-side code
-          </li>
-          <li>
-            <a href="http://getbootstrap.com/">Bootstrap</a> for layout and
-            styling
-          </li>
-        </ul>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-          <li>
-            <strong>Client-side navigation</strong>. For example, click{" "}
-            <em>Counter</em> then <em>Back</em> to return here.
-          </li>
-          <li>
-            <strong>Development server integration</strong>. In development
-            mode, the development server from <code>create-react-app</code> runs
-            in the background automatically, so your client-side resources are
-            dynamically built on demand and the page refreshes when you modify
-            any file.
-          </li>
-          <li>
-            <strong>Efficient production builds</strong>. In production mode,
-            development-time features are disabled, and your{" "}
-            <code>dotnet publish</code> configuration produces minified,
-            efficiently bundled JavaScript files.
-          </li>
-        </ul>
-        <p>
-          The <code>ClientApp</code> subdirectory is a standard React
-          application based on the <code>create-react-app</code> template. If
-          you open a command prompt in that directory, you can run{" "}
-          <code>npm</code> commands such as <code>npm test</code> or{" "}
-          <code>npm install</code>.
-        </p>
+      <div className="py-4">
+        {/* <h5>Welcome!</h5>
+        <h6>Home Page</h6>
+        <div className="d-flex justify-content-center">
+          <button className="btn btn-primary btn-sm">Login here</button>
+          <p>Do you not have any account yet? </p>
+          <Link to="/register">Register here</Link>
+        </div> */}
+        <div className="text-center">
+          <div className="col-md-5  mx-auto my-5">
+            <h4 className="font-weight-normal lead pt-3">
+              Student Assessment Attendance System
+            </h4>
+            <h6 className="py-3">
+              Manage assessments and attendances for each student!
+            </h6>
+            <Link
+              to="/login"
+              className="btn btn-outline-secondary btn-sm col-sm-4"
+            >
+              Login
+            </Link>
+            <p className="pt-3">No account yet?</p>
+            <Link to="/register">Create one</Link>
+          </div>
+        </div>
       </div>
     );
   }
