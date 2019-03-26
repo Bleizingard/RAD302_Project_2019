@@ -17,6 +17,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
             SeedLecturers(db);
             SeedModules(db);
             SeedModuleLinks(db);
+            SeedAssessment(db);
         }
 
         public static void RemoveAll(StudentAssAttSysContext db)
@@ -24,6 +25,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
             RemoveStudents(db);
             RemoveLecturers(db);
             RemoveModules(db);
+            RemoveAssessments(db);
         }
 
         public static void SeedStudents(StudentAssAttSysContext db)
@@ -146,6 +148,29 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
                 n++;
             }
+            db.SaveChanges();
+        }
+
+        public static void SeedAssessment(StudentAssAttSysContext db)
+        {
+            db.Assessments.Add(new Assessment
+                {
+                    DateTimeStart = DateTime.Now.AddHours(-1),
+                    DateTimeEnd = DateTime.Now.AddHours(1),
+                    LecturerId = db.Lecturers.FirstOrDefault().Id,
+                    ModuleId = db.Modules.FirstOrDefault().Id
+                }
+            );
+            db.SaveChanges();
+        }
+
+        public static void RemoveAssessments(StudentAssAttSysContext db)
+        {
+            foreach (var assessment in db.Assessments)
+            {
+                db.Entry(assessment).State = EntityState.Deleted;
+            }
+
             db.SaveChanges();
         }
     }

@@ -13,18 +13,24 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
     public class ResultRepositoryTest
     {
         private ResultRepository Repository;
+        private StudentAssAttSysContext dbContext = new StudentAssAttSysContext();
 
         [OneTimeSetUp]
         public void InitialSetup()
         {
             Repository = new ResultRepository();
+            CleanUp();
         }
 
         [SetUp]
         public void SetUp()
         {
+            InfrastructureTestsSeed.SeedAll(dbContext);
+
             Repository.Add(new Result
             {
+                AssessmentId = dbContext.Assessments.FirstOrDefault().Id,
+                StudentId = dbContext.Students.FirstOrDefault().Id,
                 Grade = 55
             });
         }
@@ -37,6 +43,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Repository.Remove(result);
             }
+            InfrastructureTestsSeed.RemoveAll(dbContext);
         }
 
         [Test]

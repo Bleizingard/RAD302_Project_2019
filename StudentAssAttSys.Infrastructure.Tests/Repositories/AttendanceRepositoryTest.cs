@@ -48,8 +48,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Repository.Remove(attendance);
             }
-            InfrastructureTestsSeed.RemoveLecturers(dbContext);
-            InfrastructureTestsSeed.RemoveModules(dbContext);
+            InfrastructureTestsSeed.RemoveAll(dbContext);
         }
 
         [Test]

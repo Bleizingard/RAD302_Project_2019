@@ -27,8 +27,6 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             try
             {
 
-                o.AssessmentId = 0;
-                o.StudentId = "";
                 context.Entry(o).State = EntityState.Added;
                 context.SaveChanges();
                 return new KeyValuePair<int, string>(o.AssessmentId,o.StudentId);
