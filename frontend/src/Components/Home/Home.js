@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export class Home extends Component {
-  displayName = Home.name;
-
   render() {
     return (
       <div className="py-4">
@@ -15,12 +13,14 @@ export class Home extends Component {
             <h6 className="py-3">
               Manage assessments and attendances for each student!
             </h6>
-            <Link
+            {/*<Link
               to="/login"
               className="btn btn-outline-primary btn-sm col-sm-4"
             >
               Login
-            </Link>
+            </Link>*/}
+            <button className="btn btn-sm" onClick={this.runWithAdal} />
+
             <p className="pt-3 text-muted">No account yet?</p>
             <Link to="/register">Create one</Link>
           </div>

@@ -13,6 +13,12 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import CreateAssessment from "./Components/Lecturer/CreateAssessment";
 import ModuleDetails from "./Components/Student/moduleDetails";
+import { runWithAdal } from "react-adal";
+import { authContext } from "../src/configAzureFile.js";
+
+runWithAdal(authContext, () => {
+  // TODO : continue your process
+});
 
 class App extends Component {
   render() {
