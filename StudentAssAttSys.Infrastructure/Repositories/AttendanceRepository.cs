@@ -114,6 +114,12 @@ namespace StudentAssAttSys.Infrastructure.Repositories
                 return false;
             }
 
+            if (startDateTime.CompareTo(attendance.DateTimeLectureStart) < 0 ||
+                endDateTime.CompareTo(attendance.DateTimeLectureEnd) > 0)
+            {
+                return false;
+            }
+
             attendance.DateTimeAttendanceStart = startDateTime;
 
             attendance.DateTimeAttendanceEnd = endDateTime;
