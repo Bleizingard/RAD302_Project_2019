@@ -27,12 +27,11 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             try
             {
 
-                o.Id = 0;
                 context.Entry(o).State = EntityState.Added;
                 context.SaveChanges();
                 return o.Id;
             }
-            catch
+            catch(Exception e)
             {
                 return -1;
             }
@@ -149,7 +148,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
                 return false;
             }
 
-            if (attendance.DateTimeAttendanceEnd == null || attendance.DateTimeAttendanceEnd.CompareTo(DateTime.Now) > 0)
+            if (!attendance.DateTimeAttendanceEnd.HasValue || attendance.DateTimeAttendanceEnd.Value.CompareTo(DateTime.Now) < 0)
             {
                 return false;
             }

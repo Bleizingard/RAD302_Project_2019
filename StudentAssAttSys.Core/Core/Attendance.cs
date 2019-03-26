@@ -15,10 +15,10 @@ namespace StudentAssAttSys.Core.Core
         public DateTime DateTimeLectureStart { get; set; }
         [Required]
         public DateTime DateTimeLectureEnd { get; set; }
-        public DateTime DateTimeAttendanceStart { get; set; }
-        public DateTime DateTimeAttendanceEnd { get; set; }
+        public DateTime? DateTimeAttendanceStart { get; set; }
+        public DateTime? DateTimeAttendanceEnd { get; set; }
         [Required]
-        public int LecturerId { get; set; }
+        public string LecturerId { get; set; }
         [Required]
         public int ModuleId { get; set; } 
 

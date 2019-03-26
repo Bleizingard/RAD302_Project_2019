@@ -20,20 +20,24 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         public void InitialSetup()
         {
             Repository = new AttendanceRepository();
+
+            CleanUp();
         }
 
         [SetUp]
         public void SetUp()
         {
+            InfrastructureTestsSeed.SeedModules(dbContext);
+            InfrastructureTestsSeed.SeedLecturers(dbContext);
             Repository.Add(new Attendance
             {
-                DateTimeLectureStart = DateTime.Parse("01/01/2019"),
-                DateTimeLectureEnd = DateTime.Parse("02/02/2019"),
-                LecturerId = 1,
-                ModuleId = 1
+                DateTimeLectureStart = DateTime.Parse("03/03/2019"),
+                DateTimeLectureEnd = DateTime.Parse("06/06/2019"),
+                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
+                DateTimeAttendanceEnd = DateTime.Parse("05/05/2019"),
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
-            InfrastructureTestsSeed.SeedLecturers(dbContext);
-            InfrastructureTestsSeed.SeedStudents(dbContext);
         }
 
         [TearDown]
@@ -45,7 +49,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
                 Repository.Remove(attendance);
             }
             InfrastructureTestsSeed.RemoveLecturers(dbContext);
-            InfrastructureTestsSeed.RemoveStudents(dbContext);
+            InfrastructureTestsSeed.RemoveModules(dbContext);
         }
 
         [Test]
@@ -54,9 +58,11 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             Attendance attendance = new Attendance
             {
                 DateTimeLectureStart = DateTime.Parse("03/03/2019"),
-                DateTimeLectureEnd = DateTime.Parse("03/03/2019"),
-                LecturerId = 1,
-                ModuleId = 1
+                DateTimeLectureEnd = DateTime.Parse("06/06/2019"),
+                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
+                DateTimeAttendanceEnd = DateTime.Parse("05/05/2019"),
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             };
             int result = Repository.Add(attendance);
             Assert.That(result, Is.GreaterThan(0));
@@ -68,7 +74,9 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             int attendanceId = Repository.Add(new Attendance
             {
                 DateTimeLectureStart = DateTime.Parse("03/03/2019"),
-                DateTimeLectureEnd = DateTime.Parse("04/04/2019")
+                DateTimeLectureEnd = DateTime.Parse("04/04/2019"),
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             Attendance attendance = Repository.GetById(attendanceId);
             DateTime newDateTime = DateTime.Parse("09/09/2019");
@@ -97,8 +105,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("04/04/2019"),
                 DateTimeLectureEnd = endDateTime,
-                LecturerId = 1,
-                ModuleId = 1
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             Attendance attendance = Repository.GetById(attendanceId);
             Assert.That(attendance.DateTimeLectureEnd, Is.EqualTo(endDateTime).Within(1).Minutes);
@@ -125,8 +133,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("04/04/2019"),
                 DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
-                LecturerId = 1,
-                ModuleId = 1
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("06/06/2019"));
             Assert.IsTrue(result);
@@ -141,8 +149,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
                 DateTimeLectureEnd = DateTime.Parse("08/08/2019"),
                 DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
                 DateTimeAttendanceEnd = DateTime.Parse("07/07/2019"),
-                LecturerId = 1,
-                ModuleId = 1
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("06/06/2019"));
             Assert.IsFalse(result);
@@ -155,8 +163,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("04/04/2019"),
                 DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
-                LecturerId = 1,
-                ModuleId = 1
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("06/06/2019"), DateTime.Parse("05/05/2019"));
             Assert.IsFalse(result);
@@ -169,8 +177,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("04/04/2019"),
                 DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
-                LecturerId = 1,
-                ModuleId = 1,
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("02/02/2019"), DateTime.Parse("06/06/2019"));
             Assert.IsFalse(result);
@@ -183,8 +191,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeLectureStart = DateTime.Parse("04/04/2019"),
                 DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
-                LecturerId = 1,
-                ModuleId = 1,
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("08/08/2019"));
             Assert.IsFalse(result);
@@ -195,12 +203,12 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             int attendanceId = Repository.Add(new Attendance
             {
-                DateTimeLectureStart = DateTime.Parse("03/03/2019"),
-                DateTimeLectureEnd = DateTime.Parse("08/08/2019"),
-                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019"),
-                LecturerId = 1,
-                ModuleId = 1
+                DateTimeLectureStart = DateTime.Now.AddHours(-1),
+                DateTimeLectureEnd = DateTime.Now.AddHours(1),
+                DateTimeAttendanceStart = DateTime.Now.AddHours(-1),
+                DateTimeAttendanceEnd = DateTime.Now.AddHours(1),
+                LecturerId = dbContext.Lecturers.FirstOrDefault().Id,
+                ModuleId = dbContext.Modules.FirstOrDefault().Id
             });
 
             bool result = Repository.Close(attendanceId);
