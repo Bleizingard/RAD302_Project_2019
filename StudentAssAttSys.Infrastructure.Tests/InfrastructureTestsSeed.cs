@@ -1,6 +1,7 @@
 ﻿using StudentAssAttSys.Core.Core;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,13 @@ namespace StudentAssAttSys.Infrastructure.Tests
             SeedLecturers(db);
             SeedModules(db);
             SeedModuleLinks(db);
+        }
+
+        public static void RemoveAll(StudentAssAttSysContext db)
+        {
+            RemoveStudents(db);
+            RemoveLecturers(db);
+            RemoveModules(db);
         }
 
         public static void SeedStudents(StudentAssAttSysContext db)
@@ -39,6 +47,16 @@ namespace StudentAssAttSys.Infrastructure.Tests
                     StudentNumber = "S47223"
                 }
             });
+            db.SaveChanges();
+        }
+
+        public static void RemoveStudents(StudentAssAttSysContext db)
+        {
+            foreach (var student in db.Students)
+            {
+                db.Entry(student).State = EntityState.Deleted;
+            }
+            db.SaveChanges();
         }
 
         public static void SeedLecturers(StudentAssAttSysContext db)
@@ -60,6 +78,16 @@ namespace StudentAssAttSys.Infrastructure.Tests
                     Email = "bali.test@mail.itsligo.ie"
                 }
             });
+            db.SaveChanges();
+        }
+
+        public static void RemoveLecturers(StudentAssAttSysContext db)
+        {
+            foreach (var lectuer in db.Lecturers)
+            {
+                db.Entry(lectuer).State = EntityState.Deleted;
+            }
+            db.SaveChanges();
         }
 
         public static void SeedModules(StudentAssAttSysContext db)
@@ -77,6 +105,16 @@ namespace StudentAssAttSys.Infrastructure.Tests
                     GPAPercentage = 50.0
                 }
             });
+            db.SaveChanges();
+        }
+
+        public static void RemoveModules(StudentAssAttSysContext db)
+        {
+            foreach (var module in db.Modules)
+            {
+                db.Entry(module).State = EntityState.Deleted;
+            }
+            db.SaveChanges();
         }
 
         public static void SeedModuleLinks(StudentAssAttSysContext db)
@@ -108,6 +146,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
                 n++;
             }
+            db.SaveChanges();
         }
     }
 }
