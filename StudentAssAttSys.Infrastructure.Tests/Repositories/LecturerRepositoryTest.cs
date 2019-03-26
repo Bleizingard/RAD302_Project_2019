@@ -18,6 +18,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         public void InitialSetup()
         {
             Repository = new LecturerRepository();
+
+            CleanUp();
         }
 
         [SetUp]
@@ -25,7 +27,10 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Repository.Add(new Lecturer
             {
-                FirstName = "FirstLecturer"
+                Id = "euiheufh",
+                FirstName = "FirstLecturer",
+                LastName = "Test",
+                Email = "FirstLecturerTest@mail.itsligo.ie"
             });
         }
 
@@ -44,10 +49,17 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Lecturer lecturer = new Lecturer
             {
-                FirstName = "ShouldAddLecturerTest"
+                Id = "heuiheufh",
+                FirstName = "ShouldAddLecturer",
+                LastName = "Test",
+                Email = "FirstLecturerTest@mail.itsligo.ie"
             };
             string result = Repository.Add(lecturer);
-            Assert.That(result.Length, Is.GreaterThan(0));
+            Assert.Multiple(() =>
+            {
+                Assert.IsNotEmpty(result);
+                Assert.That(result, Is.Not.EqualTo("-1"));
+            });
         }
 
         [Test]
@@ -55,7 +67,10 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             string lecturerId = Repository.Add(new Lecturer
             {
-                FirstName = "ShouldEditLecturer"
+                Id = "heuiheufh",
+                FirstName = "ShouldEditLecturer",
+                LastName = "Test",
+                Email = "FirstLecturerTest@mail.itsligo.ie"
             });
             Lecturer lecturer = Repository.GetById(lecturerId);
             lecturer.FirstName = "NewFirstname";
@@ -80,10 +95,13 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             string lecturerId = Repository.Add(new Lecturer
             {
-                FirstName = "GetLecturerByIdTest"
+                Id = "heuiheufh",
+                FirstName = "ShouldGetByLecturerId",
+                LastName = "Test",
+                Email = "FirstLecturerTest@mail.itsligo.ie"
             });
             Lecturer lecturer = Repository.GetById(lecturerId);
-            Assert.That(lecturer.FirstName, Is.EqualTo("GetLecturerByIdTest"));
+            Assert.That(lecturer.FirstName, Is.EqualTo("ShouldGetByLecturerId"));
         }
 
         [Test]
