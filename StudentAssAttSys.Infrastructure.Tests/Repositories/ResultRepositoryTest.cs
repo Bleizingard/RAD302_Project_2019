@@ -29,8 +29,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
 
             Repository.Add(new Result
             {
-                AssessmentId = dbContext.Assessments.FirstOrDefault().Id,
-                StudentId = dbContext.Students.FirstOrDefault().Id,
+                AssessmentId = dbContext.Assessments.ToArray()[1].Id,
+                StudentId = dbContext.Students.ToArray()[1].Id,
                 Grade = 55
             });
         }
@@ -51,6 +51,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Result result = new Result
             {
+                AssessmentId = dbContext.Assessments.ToArray()[0].Id,
+                StudentId = dbContext.Students.ToArray()[0].Id,
                 Grade = 79
             };
             KeyValuePair<int, string> added = Repository.Add(result);
@@ -66,6 +68,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             KeyValuePair<int, string> resultId = Repository.Add(new Result
             {
+                AssessmentId = dbContext.Assessments.ToArray()[0].Id,
+                StudentId = dbContext.Students.ToArray()[0].Id,
                 Grade = 44
             });
             Result result = Repository.GetById(resultId);
@@ -91,6 +95,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             KeyValuePair<int,string> resultId = Repository.Add(new Result
             {
+                AssessmentId = dbContext.Assessments.ToArray()[0].Id,
+                StudentId = dbContext.Students.ToArray()[0].Id,
                 Grade = 65
             });
             Result result = Repository.GetById(resultId);

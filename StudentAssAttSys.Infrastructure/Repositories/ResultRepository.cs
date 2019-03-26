@@ -31,7 +31,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
                 context.SaveChanges();
                 return new KeyValuePair<int, string>(o.AssessmentId,o.StudentId);
             }
-            catch
+            catch(Exception e)
             {
                 return new KeyValuePair<int, string>(-1,"-1");
             }

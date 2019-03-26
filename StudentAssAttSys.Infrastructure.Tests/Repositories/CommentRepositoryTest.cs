@@ -25,7 +25,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Repository.Add(new Comment
             {
-                Message = "FirstComment"
+                Message = "FirstComment",
+                DateTimeCreation = DateTime.Today
             });
         }
 
@@ -44,7 +45,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Comment comment = new Comment
             {
-                Message = "ShouldAddCommentTest"
+                Message = "ShouldAddCommentTest",
+                DateTimeCreation = DateTime.Today
             };
             int result = Repository.Add(comment);
             Assert.That(result, Is.GreaterThan(0));
@@ -55,7 +57,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             int commentId = Repository.Add(new Comment
             {
-                Message = "ShouldEditComment"
+                Message = "ShouldEditComment",
+                DateTimeCreation = DateTime.Today
             });
             Comment comment = Repository.GetById(commentId);
             comment.Message = "NewMessage";
@@ -80,7 +83,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             int commentId = Repository.Add(new Comment
             {
-                Message = "GetCommentByIdTest"
+                Message = "GetCommentByIdTest",
+                DateTimeCreation = DateTime.Today
             });
             Comment comment = Repository.GetById(commentId);
             Assert.That(comment.Message, Is.EqualTo("GetCommentByIdTest"));

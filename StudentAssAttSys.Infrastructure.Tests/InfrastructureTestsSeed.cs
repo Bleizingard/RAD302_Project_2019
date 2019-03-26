@@ -22,10 +22,10 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveAll(StudentAssAttSysContext db)
         {
+            RemoveAssessments(db);
+            RemoveModules(db);
             RemoveStudents(db);
             RemoveLecturers(db);
-            RemoveModules(db);
-            RemoveAssessments(db);
         }
 
         public static void SeedStudents(StudentAssAttSysContext db)
@@ -155,14 +155,23 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void SeedAssessment(StudentAssAttSysContext db)
         {
-            db.Assessments.Add(new Assessment
+            db.Assessments.AddRange(new List<Assessment>()
+            {
+                new Assessment
+                {
+                    DateTimeStart = DateTime.Now.AddHours(-1),
+                    DateTimeEnd = DateTime.Now.AddHours(1),
+                    LecturerId = db.Lecturers.FirstOrDefault().Id,
+                    ModuleId = db.Modules.FirstOrDefault().Id
+                },
+                new Assessment
                 {
                     DateTimeStart = DateTime.Now.AddHours(-1),
                     DateTimeEnd = DateTime.Now.AddHours(1),
                     LecturerId = db.Lecturers.FirstOrDefault().Id,
                     ModuleId = db.Modules.FirstOrDefault().Id
                 }
-            );
+            });
             db.SaveChanges();
         }
 
