@@ -26,8 +26,10 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Repository.Add(new Attendance
             {
-                DateTimeAttendanceStart = DateTime.Parse("01/01/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("02/02/2019")
+                DateTimeLectureStart = DateTime.Parse("01/01/2019"),
+                DateTimeLectureEnd = DateTime.Parse("02/02/2019"),
+                LecturerId = 1,
+                ModuleId = 1
             });
         }
 
@@ -46,8 +48,10 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Attendance attendance = new Attendance
             {
-                DateTimeAttendanceStart = DateTime.Parse("03/03/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("03/03/2019")
+                DateTimeLectureStart = DateTime.Parse("03/03/2019"),
+                DateTimeLectureEnd = DateTime.Parse("03/03/2019"),
+                LecturerId = 2,
+                ModuleId = 2
             };
             int result = Repository.Add(attendance);
             Assert.That(result, Is.GreaterThan(0));
@@ -58,18 +62,18 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             int attendanceId = Repository.Add(new Attendance
             {
-                DateTimeAttendanceStart = DateTime.Parse("03/03/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("04/04/2019")
+                DateTimeLectureStart = DateTime.Parse("03/03/2019"),
+                DateTimeLectureEnd = DateTime.Parse("04/04/2019")
             });
             Attendance attendance = Repository.GetById(attendanceId);
             DateTime newDateTime = DateTime.Parse("09/09/2019");
-            attendance.DateTimeAttendanceEnd = newDateTime;
+            attendance.DateTimeLectureEnd = newDateTime;
             bool result = Repository.Edit(attendance);
             attendance = Repository.GetById(attendanceId);
             Assert.Multiple(() =>
             {
                 Assert.IsTrue(result);
-                Assert.That(attendance.DateTimeAttendanceEnd, Is.EqualTo(newDateTime).Within(1).Minutes);
+                Assert.That(attendance.DateTimeLectureEnd, Is.EqualTo(newDateTime).Within(1).Minutes);
             });
         }
 
@@ -86,11 +90,13 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             DateTime endDateTime = DateTime.Parse("05/05/2019");
             int attendanceId = Repository.Add(new Attendance
             {
-                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = endDateTime
+                DateTimeLectureStart = DateTime.Parse("04/04/2019"),
+                DateTimeLectureEnd = endDateTime,
+                LecturerId = 4,
+                ModuleId = 4
             });
             Attendance attendance = Repository.GetById(attendanceId);
-            Assert.That(attendance.DateTimeAttendanceEnd, Is.EqualTo(endDateTime).Within(1).Minutes);
+            Assert.That(attendance.DateTimeLectureEnd, Is.EqualTo(endDateTime).Within(1).Minutes);
         }
 
         [Test]
@@ -108,75 +114,92 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         }
 
         [Test]
-        public void IsAttendanceOpenedBetweenDateTimes()
+        public void OpenAttendance()
         {
             int attendanceId = Repository.Add(new Attendance
             {
-                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019")
+                DateTimeLectureStart = DateTime.Parse("04/04/2019"),
+                DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
+                LecturerId = 1,
+                ModuleId = 1
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("06/06/2019"));
             Assert.IsTrue(result);
         }
 
         [Test]
-        public void IsAttendanceClosedIfEarlierAndBetween()
+        public void NotOpenAttendanceBecauseIsAlreadyStarted()
         {
             int attendanceId = Repository.Add(new Attendance
             {
+                DateTimeLectureStart = DateTime.Parse("03/03/2019"),
+                DateTimeLectureEnd = DateTime.Parse("08/08/2019"),
                 DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019")
+                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019"),
+                LecturerId = 1,
+                ModuleId = 1
+            });
+            bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("06/06/2019"));
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void NotOpenBecauseStartIsLaterThanFinish()
+        {
+            int attendanceId = Repository.Add(new Attendance
+            {
+                DateTimeLectureStart = DateTime.Parse("04/04/2019"),
+                DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
+                LecturerId = 1,
+                ModuleId = 1
+            });
+            bool result = Repository.Open(attendanceId, DateTime.Parse("06/06/2019"), DateTime.Parse("05/05/2019"));
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void NotOpenBecauseAttendanceEarlierThanLecture()
+        {
+            int attendanceId = Repository.Add(new Attendance
+            {
+                DateTimeLectureStart = DateTime.Parse("04/04/2019"),
+                DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
+                LecturerId = 1,
+                ModuleId = 1,
             });
             bool result = Repository.Open(attendanceId, DateTime.Parse("02/02/2019"), DateTime.Parse("06/06/2019"));
             Assert.IsFalse(result);
         }
 
         [Test]
-        public void IsAttendanceClosedIfBetweenAndLater()
+        public void NotOpenBecauseAttendanceLaterThanLecture()
         {
             int attendanceId = Repository.Add(new Attendance
             {
-                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019")
+                DateTimeLectureStart = DateTime.Parse("04/04/2019"),
+                DateTimeLectureEnd = DateTime.Parse("07/07/2019"),
+                LecturerId = 1,
+                ModuleId = 1,
             });
-            bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("09/09/2019"));
+            bool result = Repository.Open(attendanceId, DateTime.Parse("05/05/2019"), DateTime.Parse("08/08/2019"));
             Assert.IsFalse(result);
         }
 
         [Test]
-        public void IsAttendanceClosedIfEarlierAndLater()
+        public void CloseAttendance()
         {
             int attendanceId = Repository.Add(new Attendance
             {
+                DateTimeLectureStart = DateTime.Parse("03/03/2019"),
+                DateTimeLectureEnd = DateTime.Parse("08/08/2019"),
                 DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019")
+                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019"),
+                LecturerId = 1,
+                ModuleId = 1
             });
-            bool result = Repository.Open(attendanceId, DateTime.Parse("02/02/2019"), DateTime.Parse("09/09/2019"));
-            Assert.IsFalse(result);
-        }
 
-        [Test]
-        public void IsAttendanceOpenedGivenEarlierFinish()
-        {
-            int attendanceId = Repository.Add(new Attendance
-            {
-                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019")
-            });
-            bool result = Repository.Open(attendanceId, DateTime.Parse("06/06/2019"));
+            bool result = Repository.Close(attendanceId);
             Assert.IsTrue(result);
-        }
-
-        [Test]
-        public void IsAttendanceClosedGivenLaterFinish()
-        {
-            int attendanceId = Repository.Add(new Attendance
-            {
-                DateTimeAttendanceStart = DateTime.Parse("04/04/2019"),
-                DateTimeAttendanceEnd = DateTime.Parse("07/07/2019")
-            });
-            bool result = Repository.Open(attendanceId, DateTime.Parse("09/09/2019"));
-            Assert.IsFalse(result);
         }
     }
 }
