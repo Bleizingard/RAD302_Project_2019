@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import "./App.css";
 import { Layout } from "./Components/Layout";
 import Admin from "./Components/Admin/Admin.js";
 import CreateModule from "./Components/Admin/createModule";

@@ -6,8 +6,8 @@ export class Login extends Component {
 
   render() {
     return (
-      <div className="text-center">
-        <form className="form-signin">
+      <div className="text-center py-3">
+        <form className="loginForm">
           <img
             className="mb-4"
             src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
@@ -17,7 +17,7 @@ export class Login extends Component {
           />
           <h1 className="h5 mb-3 font-weight-normal">Please sign in</h1>
           <div className="form-group input-group-sm">
-            <label htmlFor="inputEmail" class="sr-only">
+            <label htmlFor="inputEmail" className="sr-only">
               Email address
             </label>
             <input
@@ -28,7 +28,7 @@ export class Login extends Component {
             />
           </div>
           <div className="form-group input-group-sm">
-            <label for="inputPassword" class="sr-only">
+            <label htmlFor="inputPassword" className="sr-only">
               Password
             </label>
             <input
@@ -43,7 +43,7 @@ export class Login extends Component {
             Sign in
           </button>
           <p className="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-          <p className="text center mb-3 font-weight-normal">
+          <p className="text-muted mb-3 font-weight-normal">
             Do you not have any account yet?
           </p>
           <Link to="/register">Register here</Link>
