@@ -35,5 +35,15 @@ namespace StudentAssAttSys.Infrastructure
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Result> Results { get; set; }
 
+
+        //Fluent API Configuration
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Result>()
+                .HasRequired(e => e.Student)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+        }
     }
 }
