@@ -47,6 +47,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 DateTimeStart = DateTime.Parse("03/03/2019"),
                 DateTimeEnd = DateTime.Parse("03/03/2019")
+
             };
             int result = Repository.Add(assessment);
             Assert.That(result, Is.GreaterThan(0));

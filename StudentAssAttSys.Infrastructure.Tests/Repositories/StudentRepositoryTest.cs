@@ -18,15 +18,24 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         public void InitialSetup()
         {
             Repository = new StudentRepository();
+
+            CleanUp();
+
         }
 
         [SetUp]
         public void SetUp()
         {
-            Repository.Add(new Student
+            Student student = new Student
             {
-                FirstName = "FirstStudent"
-            });
+                Id = "heuiheufh",
+                FirstName = "FirstStudent",
+                LastName = "Test",
+                Email = "SXXXXXX0@mail.itsligo.ie",
+                StudentNumber = "SXXXXXX0"
+            };
+
+            Repository.Add(student);
         }
 
         [TearDown]
@@ -44,10 +53,18 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Student student = new Student
             {
-                FirstName = "ShouldAddStudentTest"
+                Id = "euiheufh",
+                FirstName = "ShouldAddStudentTest",
+                LastName = "Test",
+                Email = "SXXXXXXX@mail.itsligo.ie",
+                StudentNumber = "SXXXXXXX"                
             };
             string result = Repository.Add(student);
-            Assert.That(result.Length, Is.GreaterThan(0));
+            Assert.Multiple(() =>
+            {
+                Assert.IsNotEmpty(result);
+                Assert.That(result, Is.Not.EqualTo("-1"));
+            });
         }
 
         [Test]
@@ -55,7 +72,11 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             string studentId = Repository.Add(new Student
             {
-                FirstName = "ShouldEditStudent"
+                Id = "euiheufh",
+                FirstName = "ShouldAddStudentTest",
+                LastName = "Test",
+                Email = "SXXXXXXX@mail.itsligo.ie",
+                StudentNumber = "SXXXXXXX"
             });
             Student student = Repository.GetById(studentId);
             student.FirstName = "NewFirstname";
@@ -80,10 +101,14 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             string studentId = Repository.Add(new Student
             {
-                FirstName = "GetStudentByIdTest"
+                Id = "euiheufh",
+                FirstName = "ShouldGetByStudentIdTest",
+                LastName = "Test",
+                Email = "SXXXXXXX@mail.itsligo.ie",
+                StudentNumber = "SXXXXXXX"
             });
             Student student = Repository.GetById(studentId);
-            Assert.That(student.FirstName, Is.EqualTo("GetStudentByIdTest"));
+            Assert.That(student.FirstName, Is.EqualTo("ShouldGetByStudentIdTest"));
         }
 
         [Test]

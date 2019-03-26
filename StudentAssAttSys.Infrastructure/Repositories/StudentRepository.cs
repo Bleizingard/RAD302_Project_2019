@@ -26,13 +26,11 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-
-                o.Id = "";
                 context.Entry(o).State = EntityState.Added;
                 context.SaveChanges();
                 return o.Id;
             }
-            catch
+            catch (Exception ex)
             {
                 return "-1";
             }

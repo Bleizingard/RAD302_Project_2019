@@ -38,11 +38,6 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             }
         }
 
-        public bool Close(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         /**
          * <summary>Edit <c>Attendance</c> in the database</summary>
          * <returns>Returns <c>true</c> if succeed or <c>false</c> if it fails</returns>
@@ -97,37 +92,69 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         }
 
         /**
-         * <summary>Check if <c>Attendance</c> is opened between two <c>DateTime</c></summary>
-         * <returns>Returns <c>true</c> if opoened or <c>false</c> if not opened</returns>
+         * <summary>Set the <c>DateTimeAttendanceStart</c> and <c>DateTimeAttendanceEnd</c> of an Attendance</summary>
+         * <returns>Returns <c>false</c> if a error occured else <c>true</c></returns>
          */
         public bool Open(int id, DateTime startDateTime, DateTime endDateTime)
         {
-            Attendance attendance = context.Attendances.FirstOrDefault(a =>
-                a.Id == id && DateTime.Compare(startDateTime, a.DateTimeAttendanceStart) >= 0 &&
-                DateTime.Compare(a.DateTimeAttendanceEnd, endDateTime) >= 0);
+            Attendance attendance = context.Attendances.Find(id);
+
             if (attendance == null)
             {
                 return false;
             }
+
+            if (attendance.DateTimeAttendanceStart != null)
+            {
+                return false;
+            }
+
+            if (startDateTime.CompareTo(endDateTime) > 0)
+            {
+                return false;
+            }
+
+            attendance.DateTimeAttendanceStart = startDateTime;
+
+            attendance.DateTimeAttendanceEnd = endDateTime;
+
+            context.Entry(attendance).State = EntityState.Modified;
+            context.SaveChanges();
             return true;
 
         }
 
         /**
-         * <summary>Check if <c>Attendance</c> is opened before given <c>DateTime</c></summary>
-         * <returns>Returns <c>true</c> if opoened or <c>false</c> if not opened</returns>
+         * <summary>Set the <c>DateTimeAttendanceStart</c> and <c>DateTimeAttendanceEnd</c> of an Attendance</summary>
+         * <returns>Returns <c>false</c> if a error occured else <c>true</c></returns>
          */
         public bool Open(int id, DateTime endDateTime)
         {
-            Attendance attendance = context.Attendances.FirstOrDefault(a =>
-                a.Id == id && DateTime.Compare(a.DateTimeAttendanceEnd, endDateTime) >= 0);
+            return Open(id, DateTime.Now, endDateTime);
+        }
+
+
+        public bool Close(int id)
+        {
+            Attendance attendance = context.Attendances.Find(id);
+
             if (attendance == null)
             {
                 return false;
             }
 
+            if (attendance.DateTimeAttendanceEnd == null || attendance.DateTimeAttendanceEnd.CompareTo(DateTime.Now) > 0)
+            {
+                return false;
+            }
+
+            attendance.DateTimeAttendanceEnd = DateTime.Now;
+
+            context.Entry(attendance).State = EntityState.Modified;
+            context.SaveChanges();
             return true;
         }
+
 
         /**
          * <summary>Remove <c>Attndanc</c> from the database</summary>
