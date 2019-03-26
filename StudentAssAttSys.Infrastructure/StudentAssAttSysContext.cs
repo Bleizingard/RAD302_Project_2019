@@ -43,7 +43,6 @@ namespace StudentAssAttSys.Infrastructure
                 .HasRequired(e => e.Student)
                 .WithMany()
                 .WillCascadeOnDelete(false);
-
         }
     }
 }
