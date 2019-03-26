@@ -13,18 +13,29 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
     public class AssessmentRepositoryTest
     {
         private AssessmentRepository Repository;
+        private StudentAssAttSysContext Context;
 
         [OneTimeSetUp]
         public void InitialSetup()
         {
             Repository = new AssessmentRepository();
+            Context = new StudentAssAttSysContext();
+
+            CleanUp();
         }
 
         [SetUp]
         public void SetUp()
         {
+            InfrastructureTestsSeed.SeedStudents(Context);
+            InfrastructureTestsSeed.SeedLecturers(Context);
+            InfrastructureTestsSeed.SeedModules(Context);
+            InfrastructureTestsSeed.SeedModuleLinks(Context);
+
             Repository.Add(new Assessment
             {
+                LecturerId = Context.Lecturers.First().Id,
+                ModuleId = Context.Modules.First().Id,
                 DateTimeStart = DateTime.Parse("01/01/2019"),
                 DateTimeEnd = DateTime.Parse("02/02/2019")
             });
@@ -38,6 +49,10 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Repository.Remove(assessment);
             }
+
+            InfrastructureTestsSeed.RemoveModules(Context);
+            InfrastructureTestsSeed.RemoveLecturers(Context);
+            InfrastructureTestsSeed.RemoveStudents(Context);
         }
 
         [Test]
@@ -45,6 +60,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             Assessment assessment = new Assessment
             {
+                LecturerId = Context.Lecturers.First().Id,
+                ModuleId = Context.Modules.First().Id,
                 DateTimeStart = DateTime.Parse("03/03/2019"),
                 DateTimeEnd = DateTime.Parse("03/03/2019")
 
@@ -58,6 +75,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             int assessmentId = Repository.Add(new Assessment
             {
+                LecturerId = Context.Lecturers.First().Id,
+                ModuleId = Context.Modules.First().Id,
                 DateTimeStart = DateTime.Parse("03/03/2019"),
                 DateTimeEnd = DateTime.Parse("04/04/2019")
             });
@@ -86,6 +105,8 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             DateTime endDateTime = DateTime.Parse("05/05/2019");
             int assessmentId = Repository.Add(new Assessment
             {
+                LecturerId = Context.Lecturers.First().Id,
+                ModuleId = Context.Modules.First().Id,
                 DateTimeStart = DateTime.Parse("04/04/2019"),
                 DateTimeEnd = endDateTime
             });
