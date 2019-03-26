@@ -15,7 +15,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
             SeedStudents(db);
             SeedLecturers(db);
             SeedModules(db);
-            SeedLinks(db);
+            SeedModuleLinks(db);
         }
 
         public static void SeedStudents(StudentAssAttSysContext db)
@@ -79,7 +79,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
             });
         }
 
-        public static void SeedLinks(StudentAssAttSysContext db)
+        public static void SeedModuleLinks(StudentAssAttSysContext db)
         {
             Module[] modules = db.Modules.ToArray();
             int n = 1;
