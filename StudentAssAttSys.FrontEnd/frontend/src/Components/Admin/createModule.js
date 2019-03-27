@@ -29,6 +29,8 @@ export class CreateModule extends Component {
     fetch("https://localhost:44342/api/Module", {
       method: "PUT",
       mode: "cors",
+      referrer: "no-referrer",
+
       headers: new Headers({
         Authorization: "Bearer " + this.props.apiToken,
         "Content-Type": "application/json"

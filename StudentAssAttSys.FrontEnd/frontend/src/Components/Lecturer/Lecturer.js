@@ -1,45 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-export class TableRow extends Component{
-  constructor(props){
-    super(props)
-  }
-
-  render(){
+export class TableRow extends Component {
+  render() {
     const row = this.props.row;
-    return(
+    return (
       <tr className="text-center">
-              <th scope="row">{index++}</th>
-              <td>{row.name}</td>
-              <td>
-                <Link to="/createAttendance" className="btn btn-primary btn-sm">
-                  Create Attendance
-                </Link>
-              </td>
+        <th scope="row" />
+        <td>{row.name}</td>
+        <td>
+          <Link to="/createAttendance" className="btn btn-primary btn-sm">
+            Create Attendance
+          </Link>
+        </td>
 
-              <td>
-                <Link to="/createAssessment" className="btn btn-primary btn-sm">
-                  Create Assessment
-                </Link>
-              </td>
-              <td>
-                <Link to="/addResult" className="btn btn-primary btn-sm">
-                  Add Result
-                </Link>
-              </td>
-            </tr>
-    )
+        <td>
+          <Link to="/createAssessment" className="btn btn-primary btn-sm">
+            Create Assessment
+          </Link>
+        </td>
+        <td>
+          <Link to="/addResult" className="btn btn-primary btn-sm">
+            Add Result
+          </Link>
+        </td>
+      </tr>
+    );
   }
 }
 
 export class Lecturer extends Component {
   displayName = Lecturer.name;
 
-  componentDidMount(){
-    fetch("https://localhost:44342/api/Modules")
-    .then(res => res.json())
-    .then(console.log(res));
+  componentDidMount() {
+    fetch("https://localhost:44342/api/Modules").then(res => res.json());
   }
 
   render() {
@@ -71,9 +65,7 @@ export class Lecturer extends Component {
               <th scope="col-3">Add Result</th>
             </tr>
           </thead>
-          <tbody>
-            
-          </tbody>
+          <tbody />
         </table>
       </div>
     );
