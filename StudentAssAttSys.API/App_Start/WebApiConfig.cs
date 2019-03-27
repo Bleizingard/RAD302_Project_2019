@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace StudentAssAttSys.API
 {
@@ -13,7 +14,11 @@ namespace StudentAssAttSys.API
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();
-            config.EnableCors();
+
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

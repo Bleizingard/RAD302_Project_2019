@@ -18,7 +18,6 @@ namespace StudentAssAttSys.API.Controllers
     */
     [Authorize]
     [RoutePrefix("api/Module")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ModulesController : ApiController
     {
         //Repository
