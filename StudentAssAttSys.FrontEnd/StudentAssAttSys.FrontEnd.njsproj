@@ -29,9 +29,53 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="frontend\src\App.js" />
+    <Compile Include="frontend\src\App.test.js" />
+    <Compile Include="frontend\src\Components\Admin\Admin.js" />
+    <Compile Include="frontend\src\Components\Admin\createModule.js" />
+    <Compile Include="frontend\src\Components\Admin\editLecturer.js" />
+    <Compile Include="frontend\src\Components\Home\Home.js" />
+    <Compile Include="frontend\src\Components\Layout.js" />
+    <Compile Include="frontend\src\Components\Lecturer\AddResult.js" />
+    <Compile Include="frontend\src\Components\Lecturer\CreateAssessment.js" />
+    <Compile Include="frontend\src\Components\Lecturer\CreateAttendance.js" />
+    <Compile Include="frontend\src\Components\Lecturer\Lecturer.js" />
+    <Compile Include="frontend\src\Components\Login\Login.js" />
+    <Compile Include="frontend\src\Components\Navbar\NavMenu.js" />
+    <Compile Include="frontend\src\Components\Register\Register.js" />
+    <Compile Include="frontend\src\Components\Student\moduleDetails.js" />
+    <Compile Include="frontend\src\Components\Student\Student.js" />
+    <Compile Include="frontend\src\configAzureFile.js" />
+    <Compile Include="frontend\src\index.js" />
+    <Compile Include="frontend\src\serviceWorker.js" />
     <Compile Include="server.js" />
+    <Content Include="frontend\.gitignore" />
+    <Content Include="frontend\package-lock.json" />
+    <Content Include="frontend\package.json" />
+    <Content Include="frontend\public\favicon.ico" />
+    <Content Include="frontend\public\index.html" />
+    <Content Include="frontend\public\manifest.json" />
+    <Content Include="frontend\README.md" />
+    <Content Include="frontend\src\Components\Admin\Admin.css" />
+    <Content Include="frontend\src\Components\Login\Login.css" />
+    <Content Include="frontend\src\Components\Navbar\NavMenu.css" />
+    <Content Include="frontend\src\Components\Student\Student.css" />
+    <Content Include="frontend\src\index.css" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="frontend\" />
+    <Folder Include="frontend\public\" />
+    <Folder Include="frontend\src\" />
+    <Folder Include="frontend\src\Components\" />
+    <Folder Include="frontend\src\Components\Admin\" />
+    <Folder Include="frontend\src\Components\Home\" />
+    <Folder Include="frontend\src\Components\Lecturer\" />
+    <Folder Include="frontend\src\Components\Login\" />
+    <Folder Include="frontend\src\Components\Navbar\" />
+    <Folder Include="frontend\src\Components\Register\" />
+    <Folder Include="frontend\src\Components\Student\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
