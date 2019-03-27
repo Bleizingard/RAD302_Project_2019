@@ -17,7 +17,7 @@
 @media (min-width: 768px) {
   .navbar.fixed-left {
     bottom: 0;
-    width: 232px;
+    width: 270px;
     flex-flow: column nowrap;
     align-items: flex-start;
   }

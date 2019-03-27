@@ -11,6 +11,7 @@ const adalConfig = {
     "https://mailitsligo.onmicrosoft.com/fada38c1-380d-40c2-8147-f6291832f959/user_impersonation"
 };
 export const authContext = new AuthenticationContext(adalConfig);
+
 export const getToken = () => {
   return authContext.getCachedToken(authContext.config.clientId);
 };

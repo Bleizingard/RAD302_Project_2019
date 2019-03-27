@@ -20,11 +20,17 @@ export class NavMenu extends Component {
           <span className="navbar-toggler-icon" />
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div
+          className="collapse navbar-collapse py-4"
+          id="navbarsExampleDefault"
+        >
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <Link to="/" className="nav-link">
-                Home<span className="sr-only">(current)</span>
+                <h6>Hello, {this.props.name}!</h6>
+                <p>You are authorized as a {this.props.role}</p>
+                {this.props.studentNr}
+                <p />
               </Link>
             </li>
             <li className="nav-item">

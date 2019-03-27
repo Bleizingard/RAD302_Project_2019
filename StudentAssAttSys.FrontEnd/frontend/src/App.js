@@ -14,16 +14,73 @@ import Register from "./Components/Register/Register";
 import CreateAssessment from "./Components/Lecturer/CreateAssessment";
 import ModuleDetails from "./Components/Student/moduleDetails";
 import { runWithAdal } from "react-adal";
-import { authContext } from "../src/configAzureFile.js";
-
-runWithAdal(authContext, () => {
-  console.log(localStorage);
-});
+import { authContext, getToken } from "../src/configAzureFile.js";
+import jwtDecode from "jwt-decode";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      uniqueName: "",
+      role: "",
+      name: "",
+      studentNumber: ""
+    };
+  }
+
+  componentDidMount() {
+    runWithAdal(authContext, () => {
+      console.log(jwtDecode(getToken()));
+      if (getToken()) {
+        var unique = jwtDecode(getToken()).unique_name;
+        var name = jwtDecode(getToken()).name;
+
+        this.setState({
+          uniqueName: unique,
+          name: name
+        });
+        var role = this.setRole(unique);
+        if (role === "student") {
+          this.getStudentNr(unique);
+        }
+      }
+    });
+  }
+
+  setRole(email) {
+    var role = "";
+    if (email.includes("@mail.itsligo.ie")) {
+      role = "student";
+    } else if (email.includes("@itsligo.ie")) {
+      role = "lecturer";
+    } else {
+      role = "unknown";
+    }
+    this.setState({
+      role: role
+    });
+    return role;
+  }
+
+  getStudentNr(email) {
+    if (email) {
+      var studentNr = email.substr(0, email.indexOf("@"));
+      console.log(studentNr);
+      this.setState({
+        studentNumber: studentNr
+      });
+    }
+  }
   render() {
+    console.log(this.state);
+
     return (
-      <Layout>
+      <Layout
+        role={this.state.role}
+        name={this.state.name}
+        studentNr={this.state.studentNumber}
+      >
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />

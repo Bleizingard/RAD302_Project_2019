@@ -6,6 +6,7 @@
     "adal-angular": "^1.0.17",
     "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "popper.js": "^1.14.7",
     "react": "^16.8.5",
