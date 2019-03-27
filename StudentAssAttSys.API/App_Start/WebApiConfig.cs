@@ -13,7 +13,7 @@ namespace StudentAssAttSys.API
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();
-
+            config.EnableCors();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

@@ -59,17 +59,6 @@ export class Student extends Component {
                   >
                     MyModules
                   </div>
-                  <div
-                    className="link col-sm-4"
-                    id="timetable-tab"
-                    data-toggle="tab"
-                    href="#timetable"
-                    role="tab"
-                    aria-controls="timetable"
-                    aria-selected="false"
-                  >
-                    Assessments Timetable
-                  </div>
                 </div>
               </nav>
               <div className="tab-content py-4" id="nav-tabContent">
@@ -79,20 +68,44 @@ export class Student extends Component {
                   role="tabpanel"
                   aria-labelledby="assessments-tab"
                 >
-                  <div className="form-group input-group-sm col-sm-4 py-2">
-                    <label htmlFor="timing">Filtered By</label>
-                    <select
-                      name="timing"
-                      className="form-control"
-                      defaultValue={""}
-                      onChange={this.handleChange}
-                    >
-                      <option value="" disabled hidden>
-                        Done/ToBeDone
-                      </option>
-                      {options}
-                    </select>
+                  <button
+                    className="btn btn-primary btn-sm"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseExample"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
+                    View Timetable
+                  </button>
+                  <div className="row">
+                    <div className="collapse py-2" id="collapseExample">
+                      <div className="">
+                        <Calendar
+                          localizer={localizer}
+                          defaultDate={new Date()}
+                          defaultView="month"
+                          events={events}
+                          style={{ height: "80vh" }}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group input-group-sm col-sm-4 py-2">
+                      <label htmlFor="timing">Filtered By</label>
+                      <select
+                        name="timing"
+                        className="form-control"
+                        defaultValue={""}
+                        onChange={this.handleChange}
+                      >
+                        <option value="" disabled hidden>
+                          Done/ToBeDone
+                        </option>
+                        {options}
+                      </select>
+                    </div>
                   </div>
+
                   <table className="table table-sm pt-3 ml-3">
                     <thead className="thead-dark text-center">
                       <tr>
@@ -142,22 +155,6 @@ export class Student extends Component {
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                <div
-                  className="tab-pane"
-                  id="timetable"
-                  role="tabpanel"
-                  aria-labelledby="timetable-tab"
-                >
-                  <div>
-                    <Calendar
-                      localizer={localizer}
-                      defaultDate={new Date()}
-                      defaultView="month"
-                      events={events}
-                      style={{ height: "80vh" }}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
