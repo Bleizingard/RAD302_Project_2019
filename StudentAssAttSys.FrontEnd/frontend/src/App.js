@@ -25,7 +25,8 @@ class App extends Component {
       uniqueName: "",
       role: "",
       name: "",
-      studentNumber: ""
+      studentNumber: "",
+      apiToken: ""
     };
   }
 
@@ -34,11 +35,13 @@ class App extends Component {
       console.log(jwtDecode(getToken()));
       if (getToken()) {
         var unique = jwtDecode(getToken()).unique_name;
+        var apiToken = jwtDecode(getToken()).aud;
         var name = jwtDecode(getToken()).name;
 
         this.setState({
           uniqueName: unique,
-          name: name
+          name: name,
+          apiToken: apiToken
         });
         var role = this.setRole(unique);
         if (role === "student") {
@@ -86,7 +89,11 @@ class App extends Component {
         <Route exact path="/register" component={Register} />
         <Route path="/moduleDetails" component={ModuleDetails} />
         <Route path="/admin" component={Admin} />
-        <Route path="/createModule" component={CreateModule} />
+        <Route
+          path="/createModule"
+          component={CreateModule}
+          apiToken={this.state.apiToken}
+        />
         <Route path="/editLecturer" component={EditLecturer} />
         <Route path="/student" component={Student} />
         <Route path="/lecturer" component={Lecturer} />

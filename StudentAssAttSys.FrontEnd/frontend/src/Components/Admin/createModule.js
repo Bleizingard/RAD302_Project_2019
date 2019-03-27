@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import "../Admin/Admin.css";
 import { Link } from "react-router-dom";
 
-/* MODULE OBJECT REQUIRE:
-name
-GPAPercentage
- */
-
 export class CreateModule extends Component {
   displayName = CreateModule.name;
   constructor(props) {
@@ -30,6 +25,19 @@ export class CreateModule extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
+
+    fetch("https://localhost:44342/api/Module", {
+      method: "PUT",
+      mode: "cors",
+      headers: new Headers({
+        Authorization: "Bearer " + this.props.apiToken,
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify({
+        name: this.state.moduleName,
+        GPAPercentage: 0
+      })
+    }).then(res => console.log(res));
   }
 
   render() {
