@@ -17,7 +17,7 @@ import { runWithAdal } from "react-adal";
 import { authContext } from "../src/configAzureFile.js";
 
 runWithAdal(authContext, () => {
-  // TODO : continue your process
+  console.log(localStorage);
 });
 
 class App extends Component {
