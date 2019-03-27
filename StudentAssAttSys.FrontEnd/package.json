@@ -1,0 +1,9 @@
+{
+  "name": "student-ass-att-sys.front-end",
+  "version": "0.0.0",
+  "description": "StudentAssAttSys.FrontEnd",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  }
+}
