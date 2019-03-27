@@ -1,8 +1,46 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+export class TableRow extends Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    const row = this.props.row;
+    return(
+      <tr className="text-center">
+              <th scope="row">{index++}</th>
+              <td>{row.name}</td>
+              <td>
+                <Link to="/createAttendance" className="btn btn-primary btn-sm">
+                  Create Attendance
+                </Link>
+              </td>
+
+              <td>
+                <Link to="/createAssessment" className="btn btn-primary btn-sm">
+                  Create Assessment
+                </Link>
+              </td>
+              <td>
+                <Link to="/addResult" className="btn btn-primary btn-sm">
+                  Add Result
+                </Link>
+              </td>
+            </tr>
+    )
+  }
+}
+
 export class Lecturer extends Component {
   displayName = Lecturer.name;
+
+  componentDidMount(){
+    fetch("https://localhost:44342/api/Modules")
+    .then(res => res.json())
+    .then(console.log(res));
+  }
 
   render() {
     return (
@@ -34,26 +72,7 @@ export class Lecturer extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr className="text-center">
-              <th scope="row">1</th>
-              <td>RAD</td>
-              <td>
-                <Link to="/createAttendance" className="btn btn-primary btn-sm">
-                  Create Attendance
-                </Link>
-              </td>
-
-              <td>
-                <Link to="/createAssessment" className="btn btn-primary btn-sm">
-                  Create Assessment
-                </Link>
-              </td>
-              <td>
-                <Link to="/addResult" className="btn btn-primary btn-sm">
-                  Add Result
-                </Link>
-              </td>
-            </tr>
+            
           </tbody>
         </table>
       </div>
