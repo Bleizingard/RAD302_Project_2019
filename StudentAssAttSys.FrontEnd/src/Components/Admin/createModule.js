@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../Admin/Admin.css";
 import { Link } from "react-router-dom";
+import { getToken } from "../../configAzureFile.js";
 
 export class CreateModule extends Component {
   displayName = CreateModule.name;
@@ -9,13 +10,19 @@ export class CreateModule extends Component {
     this.state = {
       moduleName: "",
       GPA: 0,
-      lecturer: ""
+      lecturer: "",
+      apiToken: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      apiToken: getToken()
+    });
+  }
   handleChange = e => {
     let newState = {};
     newState[e.target.name] = e.target.value;
@@ -24,22 +31,25 @@ export class CreateModule extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-      console.log(this.state);
-      
+    console.log(this.state);
+    console.log(this.state.apiToken);
+
     fetch("https://localhost:44342/api/Module", {
       method: "PUT",
       mode: "cors",
       referrer: "no-referrer",
 
       headers: new Headers({
-        Authorization: "Bearer " + this.props.apiToken,
+        Authorization: "Bearer " + this.state.apiToken,
         "Content-Type": "application/json"
       }),
       body: JSON.stringify({
         name: this.state.moduleName,
         GPAPercentage: 0
       })
-    }).then(res => console.log(res));
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 
   render() {

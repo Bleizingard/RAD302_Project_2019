@@ -76,8 +76,9 @@ class App extends Component {
     }
   }
   render() {
-    console.log("App.js State: " +this.state);
-
+    var apiToken = this.state.apiToken;
+    console.log(this.state);
+    console.log(apiToken);
     return (
       <Layout
         role={this.state.role}
@@ -88,14 +89,8 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route path="/moduleDetails" component={ModuleDetails} />
-            <Route path="/admin"
-                component={Admin}
-                apiToken={this.state.apiToken} />
-        <Route
-          path="/createModule"
-          component={CreateModule}
-          apiToken={this.state.apiToken}
-        />
+        <Route path="/admin" component={Admin} />
+        <Route path="/createModule" component={CreateModule} />
         <Route path="/editLecturer" component={EditLecturer} />
         <Route path="/student" component={Student} />
         <Route path="/lecturer" component={Lecturer} />

@@ -12,6 +12,7 @@ export class Layout extends Component {
             role={this.props.role}
             name={this.props.name}
             studentNr={this.props.studentNr}
+            apiToken={this.props.apiToken}
           />
         </div>
         <div className="col-sm-9">{this.props.children}</div>
