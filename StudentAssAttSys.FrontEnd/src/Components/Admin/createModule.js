@@ -9,8 +9,22 @@ export class CreateModule extends Component {
     super(props);
     this.state = {
       moduleName: "",
-      GPA: 0,
       lecturer: "",
+      GPA: 0,
+      lecturers: [
+        {
+          Id: "L123",
+          FirstName: "Padraig",
+          LastName: "Harte",
+          Email: "padraig.harte@itsligo.ie"
+        },
+        {
+          Id: "L234",
+          FirstName: "Paul",
+          LastName: "Powell",
+          Email: "paul.powell@itsligo.ie"
+        }
+      ],
       apiToken: ""
     };
 
@@ -32,7 +46,10 @@ export class CreateModule extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    console.log(this.state.apiToken);
+    var lecturer = this.state.lecturers.filter(obj => {
+      return obj.Email === this.state.lecturer;
+    });
+    console.log(lecturer);
 
     fetch("https://localhost:44342/api/Module", {
       method: "PUT",
@@ -45,7 +62,8 @@ export class CreateModule extends Component {
       }),
       body: JSON.stringify({
         name: this.state.moduleName,
-        GPAPercentage: 0
+        GPAPercentage: 0,
+        Lecturers: lecturer
       })
     })
       .then(res => console.log(res))
@@ -53,8 +71,14 @@ export class CreateModule extends Component {
   }
 
   render() {
-    const lecturers = ["Lect 1", "Lect 2", "Lect 3", "Others"];
-    const options = lecturers.map(opt => <option key={opt}>{opt}</option>);
+    const lecturers = this.state.lecturers;
+
+    const options = lecturers.map(opt => (
+      <option key={`${opt.FirstName}${opt.LastName}`} value={opt.Email}>
+        {opt.FirstName} {opt.LastName}
+      </option>
+    ));
+
     return (
       <div className="col-sm-6 py-2">
         <h5>Create New Module</h5>

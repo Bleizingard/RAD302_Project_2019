@@ -1,29 +1,54 @@
 import React, { Component } from "react";
 import "../Admin/Admin.css";
 import { Link } from "react-router-dom";
+import { getToken } from "../../configAzureFile.js";
 
 export class Admin extends Component {
   displayName = Admin.name;
-    constructor(props) {
-        super(props);
-        console.log("Token: " + this.props.apiToken);
+  constructor(props) {
+    super(props);
 
-        fetch("https://localhost:44342/api/Modules", {
-            method: "GET",
-            mode: "cors",
-            referrer: "no-referrer",
+    this.state = {
+      modules: []
+    };
+  }
 
-            headers: new Headers({
-                Authorization: "Bearer " + this.props.apiToken,
-                "Content-Type": "application/json"
-            })
-        }).then(res => console.log(res));
-
-        
-    }
-
+  componentDidMount() {
+    fetch("https://localhost:44342/api/Modules", {
+      method: "GET",
+      mode: "cors",
+      referrer: "no-referrer",
+      headers: new Headers({
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json"
+      })
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(res =>
+        this.setState({
+          modules: res
+        })
+      )
+      .catch(err => console.log(err));
+  }
 
   render() {
+    console.log(this.state);
+    const moduleRow = this.state.modules.map(module => (
+      <tr key={module.Id}>
+        <td>{module.Id}</td>
+        <td>{module.Name}</td>
+        <td>{module.Lecturers ? module.Lecturers.name : `No lecturer`}</td>
+        <td>{module.GPAPercentage}</td>
+        <td>
+          <Link to="/editLecturer" className="btn btn-primary btn-sm">
+            Edit Lecturer
+          </Link>
+        </td>
+      </tr>
+    ));
     return (
       <div>
         <h5>Hello, Admin!</h5>
@@ -35,7 +60,7 @@ export class Admin extends Component {
             <button className="btn-primary btn btn-sm">
               {" "}
               Create New Module
-            </button>{" "}
+            </button>
           </Link>
         </div>
         <table className="table table-hover table-sm">
@@ -44,21 +69,11 @@ export class Admin extends Component {
               <th scope="col">Module ID</th>
               <th scope="col">Module Name</th>
               <th scope="col">Lecturer</th>
+              <th scope="col">GPA Percentage</th>
               <th scope="col">Edit Lecturer</th>
             </tr>
           </thead>
-          <tbody>
-            <tr className="text-center">
-              <th scope="row">1</th>
-              <td>Module 1</td>
-              <td>Lecturer 1</td>
-              <td>
-                <Link to="/editLecturer" className="btn btn-primary btn-sm">
-                  Edit Lecturer
-                </Link>
-              </td>
-            </tr>
-          </tbody>
+          <tbody>{moduleRow}</tbody>
         </table>
       </div>
     );
