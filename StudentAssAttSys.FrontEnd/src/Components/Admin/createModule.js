@@ -24,8 +24,8 @@ export class CreateModule extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
-
+      console.log(this.state);
+      
     fetch("https://localhost:44342/api/Module", {
       method: "PUT",
       mode: "cors",

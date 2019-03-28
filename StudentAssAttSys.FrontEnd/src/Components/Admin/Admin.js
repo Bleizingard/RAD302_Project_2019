@@ -4,6 +4,24 @@ import { Link } from "react-router-dom";
 
 export class Admin extends Component {
   displayName = Admin.name;
+    constructor(props) {
+        super(props);
+        console.log("Token: " + this.props.apiToken);
+
+        fetch("https://localhost:44342/api/Modules", {
+            method: "GET",
+            mode: "cors",
+            referrer: "no-referrer",
+
+            headers: new Headers({
+                Authorization: "Bearer " + this.props.apiToken,
+                "Content-Type": "application/json"
+            })
+        }).then(res => console.log(res));
+
+        
+    }
+
 
   render() {
     return (

@@ -32,10 +32,10 @@ class App extends Component {
 
   componentDidMount() {
     runWithAdal(authContext, () => {
-      console.log(jwtDecode(getToken()));
+      console.log(getToken());
       if (getToken()) {
         var unique = jwtDecode(getToken()).unique_name;
-        var apiToken = jwtDecode(getToken()).aud;
+        var apiToken = getToken();
         var name = jwtDecode(getToken()).name;
 
         this.setState({
@@ -76,7 +76,7 @@ class App extends Component {
     }
   }
   render() {
-    console.log(this.state);
+    console.log("App.js State: " +this.state);
 
     return (
       <Layout
@@ -88,7 +88,9 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route path="/moduleDetails" component={ModuleDetails} />
-        <Route path="/admin" component={Admin} />
+            <Route path="/admin"
+                component={Admin}
+                apiToken={this.state.apiToken} />
         <Route
           path="/createModule"
           component={CreateModule}
