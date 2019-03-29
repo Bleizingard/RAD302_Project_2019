@@ -17,10 +17,10 @@ namespace StudentAssAttSys.Core.Core
         [Range(0,100)]
         public double GPAPercentage { get; set; }
     
-        public virtual List<Lecturer> Lecturers { get; set; }
-        public virtual List<Student> Students { get; set; }
-        public virtual List<Assessment> Assessments { get; set; }
-        public virtual List<Attendance> Attendances { get; set; }
+        public virtual ICollection<Lecturer> Lecturers { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Assessment> Assessments { get; set; }
+        public virtual ICollection<Attendance> Attendances { get; set; }
 
     }
 }

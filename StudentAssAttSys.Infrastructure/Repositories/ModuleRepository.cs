@@ -27,7 +27,6 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-
                 context.Entry(o).State = EntityState.Added;
                 context.SaveChanges();
                 return o.Id;
@@ -77,7 +76,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public Module[] GetAll()
         {
-            return context.Modules.ToArray();
+            return context.Modules.Include(m => m.Students).Include(m => m.Lecturers).Include(m => m.Assessments).Include(m => m.Attendances).ToArray();
         }
 
         /**
@@ -86,7 +85,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public Module GetById(int id)
         {
-            return context.Modules.FirstOrDefault(m => m.Id == id);
+            return context.Modules.Include(m => m.Students).Include(m => m.Lecturers).Include(m => m.Assessments).Include(m => m.Attendances).FirstOrDefault(m => m.Id == id);
         }
 
         /**

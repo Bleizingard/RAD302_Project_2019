@@ -48,7 +48,8 @@ export class CreateModule extends Component {
     console.log(this.state);
     var lecturer = this.state.lecturers.filter(obj => {
       return obj.Email === this.state.lecturer;
-    });
+      });
+      console.log("Lecturer");
     console.log(lecturer);
 
     fetch("https://localhost:44342/api/Module", {
@@ -60,10 +61,10 @@ export class CreateModule extends Component {
         Authorization: "Bearer " + this.state.apiToken,
         "Content-Type": "application/json"
       }),
-      body: JSON.stringify({
-        name: this.state.moduleName,
-        GPAPercentage: 0,
-        Lecturers: lecturer
+        body: JSON.stringify({
+            name: this.state.moduleName,
+            GPAPercentage: 0,
+            Lecturers: lecturer
       })
     })
       .then(res => console.log(res))

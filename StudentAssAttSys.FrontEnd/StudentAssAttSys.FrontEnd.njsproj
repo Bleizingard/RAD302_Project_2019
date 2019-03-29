@@ -60,6 +60,7 @@
     <Content Include="src\index.css" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="frontend\" />
     <Folder Include="public\" />
     <Folder Include="src\" />
     <Folder Include="src\Components\" />
