@@ -29,9 +29,12 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             Student student = new Student
             {
                 Id = "heuiheufh",
-                FirstName = "FirstStudent",
-                LastName = "Test",
-                Email = "SXXXXXX0@mail.itsligo.ie",
+                User = new User
+                {
+                    FirstName = "FirstStudent",
+                    LastName = "Test",
+                    Email = "SXXXXXX0@mail.itsligo.ie"
+                },
                 StudentNumber = "SXXXXXX0"
             };
 
@@ -54,9 +57,12 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             Student student = new Student
             {
                 Id = "euiheufh",
-                FirstName = "ShouldAddStudentTest",
-                LastName = "Test",
-                Email = "SXXXXXXX@mail.itsligo.ie",
+                User = new User
+                {
+                    FirstName = "ShouldAddStudentTest",
+                    LastName = "Test",
+                    Email = "SXXXXXXX@mail.itsligo.ie"
+                },
                 StudentNumber = "SXXXXXXX"                
             };
             string result = Repository.Add(student);
@@ -73,19 +79,22 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             string studentId = Repository.Add(new Student
             {
                 Id = "euiheufh",
-                FirstName = "ShouldAddStudentTest",
-                LastName = "Test",
-                Email = "SXXXXXXX@mail.itsligo.ie",
+                User = new User
+                {
+                    FirstName = "ShouldAddStudentTest",
+                    LastName = "Test",
+                    Email = "SXXXXXXX@mail.itsligo.ie"
+                },
                 StudentNumber = "SXXXXXXX"
             });
             Student student = Repository.GetById(studentId);
-            student.FirstName = "NewFirstname";
+            student.User.FirstName = "NewFirstname";
             bool result = Repository.Edit(student);
             student = Repository.GetById(studentId);
             Assert.Multiple(() =>
             {
                 Assert.IsTrue(result);
-                Assert.That(student.FirstName, Is.EqualTo("NewFirstname"));
+                Assert.That(student.User.FirstName, Is.EqualTo("NewFirstname"));
             });
         }
 
@@ -102,13 +111,16 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             string studentId = Repository.Add(new Student
             {
                 Id = "euiheufh",
-                FirstName = "ShouldGetByStudentIdTest",
-                LastName = "Test",
-                Email = "SXXXXXXX@mail.itsligo.ie",
+                User = new User
+                {
+                    FirstName = "ShouldGetByStudentIdTest",
+                    LastName = "Test",
+                    Email = "SXXXXXXX@mail.itsligo.ie"
+                },
                 StudentNumber = "SXXXXXXX"
             });
             Student student = Repository.GetById(studentId);
-            Assert.That(student.FirstName, Is.EqualTo("ShouldGetByStudentIdTest"));
+            Assert.That(student.User.FirstName, Is.EqualTo("ShouldGetByStudentIdTest"));
         }
 
         [Test]

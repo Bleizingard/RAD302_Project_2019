@@ -27,6 +27,8 @@ namespace StudentAssAttSys.Infrastructure
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
+
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<Assessment> Assessments { get; set; }
@@ -43,6 +45,9 @@ namespace StudentAssAttSys.Infrastructure
                 .HasRequired(e => e.Student)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<Student>()
+                .HasKey(s => s.Id);
         }
     }
 }

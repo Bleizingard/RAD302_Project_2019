@@ -47,13 +47,13 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             try
             {
                 lecturer.Id = o.Id;
-                lecturer.Assessments = o.Assessments;
-                lecturer.Attendances = o.Attendances;
-                lecturer.Comments = o.Comments;
-                lecturer.Email = o.Email;
-                lecturer.FirstName = o.FirstName;
-                lecturer.LastName = o.LastName;
-                lecturer.Modules = o.Modules;
+                lecturer.User.Assessments = o.User.Assessments;
+                lecturer.User.Attendances = o.User.Attendances;
+                lecturer.User.Comments = o.User.Comments;
+                lecturer.User.Email = o.User.Email;
+                lecturer.User.FirstName = o.User.FirstName;
+                lecturer.User.LastName = o.User.LastName;
+                lecturer.User.Modules = o.User.Modules;
 
                 context.Entry(lecturer).State = EntityState.Modified;
 
@@ -92,7 +92,8 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                context.Entry(o).State = EntityState.Deleted;
+                User user = context.Users.Find(o.Id);
+                context.Entry(user).State = EntityState.Deleted;
                 context.SaveChanges();
 
                 return true;

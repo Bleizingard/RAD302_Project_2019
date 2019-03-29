@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +27,13 @@ namespace StudentAssAttSys.Core.Core
             }
         }
 
-        public virtual ICollection<Module> Modules { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual Lecturer Lecturer { get; set; }
 
-        public virtual ICollection<Assessment> Assessments { get; set; }
-        public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual List<Module> Modules { get; set; }
+        public virtual List<Comment> Comments { get; set; }
+
+        public virtual List<Assessment> Assessments { get; set; }
+        public virtual List<Attendance> Attendances { get; set; }
     }
 }

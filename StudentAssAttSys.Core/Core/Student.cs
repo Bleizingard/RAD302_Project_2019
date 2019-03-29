@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace StudentAssAttSys.Core.Core
 {
-    public class Student : User
+    public class Student
     {
+        [ForeignKey("User")]
+        public string Id { get; set; }
+
+        public virtual User User { get; set; }
         [Required]
         public string StudentNumber { get; set; }
         

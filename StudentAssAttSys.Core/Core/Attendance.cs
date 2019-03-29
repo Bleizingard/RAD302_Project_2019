@@ -24,6 +24,6 @@ namespace StudentAssAttSys.Core.Core
 
         public virtual Lecturer Lecturer { get; set; }
         public virtual Module Module { get; set; }
-        public virtual ICollection<Student> PresentStudents { get; set; }
+        public virtual List<Student> PresentStudents { get; set; }
     }
 }

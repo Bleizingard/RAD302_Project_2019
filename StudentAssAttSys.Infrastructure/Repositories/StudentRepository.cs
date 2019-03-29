@@ -52,13 +52,13 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             {
                 student.StudentNumber = o.StudentNumber;
                 student.Id = o.Id;
-                student.Assessments = o.Assessments;
-                student.Attendances = o.Attendances;
-                student.Comments = o.Comments;
-                student.Email = o.Email;
-                student.FirstName = o.FirstName;
-                student.LastName = o.LastName;
-                student.Modules = o.Modules;
+                student.User.Assessments = o.User.Assessments;
+                student.User.Attendances = o.User.Attendances;
+                student.User.Comments = o.User.Comments;
+                student.User.Email = o.User.Email;
+                student.User.FirstName = o.User.FirstName;
+                student.User.LastName = o.User.LastName;
+                student.User.Modules = o.User.Modules;
 
                 context.Entry(student).State = EntityState.Modified;
 
@@ -77,7 +77,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public Student[] GetAll()
         {
-            return context.Students.ToArray();
+            return context.Students.Include(s => s.User).ToArray();
         }
 
         /**
@@ -86,7 +86,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public Student GetById(string id)
         {
-            return context.Students.FirstOrDefault(s => s.Id == id);
+            return context.Students.Include(s => s.User).FirstOrDefault(s => s.Id == id);
         }
 
         /**
@@ -97,7 +97,8 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                context.Entry(o).State = EntityState.Deleted;
+                User user = context.Users.Find(o.Id);
+                context.Entry(user).State = EntityState.Deleted;
                 context.SaveChanges();
 
                 return true;

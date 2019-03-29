@@ -35,17 +35,23 @@ namespace StudentAssAttSys.Infrastructure.Tests
                 new Student
                 {
                     Id = "S80611",
-                    FirstName = "Joe",
-                    LastName = "Test",
+                    User = new User
+                    {
+                        FirstName = "Joe",
+                        LastName = "Test",
+                        Email = "S80611@mail.itsligo.ie"
+                    },
                     StudentNumber = "S80611",
-                    Email = "S80611@mail.itsligo.ie"
                 },
                 new Student
                 {
                     Id = "S47223",
-                    FirstName = "Brenda",
-                    LastName = "Test",
-                    Email = "S47223@mail.itsligo.ie",
+                    User = new User
+                    {
+                        FirstName = "Brenda",
+                        LastName = "Test",
+                        Email = "S47223@mail.itsligo.ie"
+                    },
                     StudentNumber = "S47223"
                 }
             });
@@ -54,7 +60,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveStudents(StudentAssAttSysContext db)
         {
-            foreach (var student in db.Students)
+            foreach (var student in db.Users.Where(u => u.Student != null))
             {
                 db.Entry(student).State = EntityState.Deleted;
             }
@@ -68,16 +74,22 @@ namespace StudentAssAttSys.Infrastructure.Tests
                 new Lecturer
                 {
                     Id = "JLect",
-                    FirstName = "John",
-                    LastName = "Test",
-                    Email = "john.test@mail.itsligo.ie"
+                    User = new User
+                    {
+                        FirstName = "John",
+                        LastName = "Test",
+                        Email = "john.test@mail.itsligo.ie"
+                    }
                 },
                 new Lecturer
                 {
                     Id = "BLect",
-                    FirstName = "Bali",
-                    LastName = "Test",
-                    Email = "bali.test@mail.itsligo.ie"
+                    User = new User
+                    {
+                        FirstName = "Bali",
+                        LastName = "Test",
+                        Email = "bali.test@mail.itsligo.ie"
+                    }
                 }
             });
             db.SaveChanges();
@@ -85,7 +97,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveLecturers(StudentAssAttSysContext db)
         {
-            foreach (var lectuer in db.Lecturers)
+            foreach (var lectuer in db.Users.Where(u => u.Lecturer != null))
             {
                 db.Entry(lectuer).State = EntityState.Deleted;
             }
@@ -125,7 +137,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
             int n = 1;
             foreach (Module module in modules)
             {
-                if(module.Lecturers == null)
+                if (module.Lecturers == null)
                 {
                     module.Lecturers = new List<Lecturer>();
                 }
@@ -149,7 +161,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
                 n++;
             }
 
-            
+
             db.SaveChanges();
         }
 
