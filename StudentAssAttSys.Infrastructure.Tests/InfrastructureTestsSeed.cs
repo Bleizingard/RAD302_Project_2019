@@ -18,14 +18,17 @@ namespace StudentAssAttSys.Infrastructure.Tests
             SeedModules(db);
             SeedModuleLinks(db);
             SeedAssessment(db);
+            SeedResults(db);
         }
 
         public static void RemoveAll(StudentAssAttSysContext db)
         {
+            RemoveResults(db);
             RemoveAssessments(db);
             RemoveModules(db);
             RemoveStudents(db);
             RemoveLecturers(db);
+
         }
 
         public static void SeedStudents(StudentAssAttSysContext db)
@@ -34,9 +37,10 @@ namespace StudentAssAttSys.Infrastructure.Tests
             {
                 new Student
                 {
-                    Id = "S80611",
+
                     User = new User
                     {
+                        Id = "S80611",
                         FirstName = "Joe",
                         LastName = "Test",
                         Email = "S80611@mail.itsligo.ie"
@@ -45,9 +49,10 @@ namespace StudentAssAttSys.Infrastructure.Tests
                 },
                 new Student
                 {
-                    Id = "S47223",
+
                     User = new User
                     {
+                        Id = "S47223",
                         FirstName = "Brenda",
                         LastName = "Test",
                         Email = "S47223@mail.itsligo.ie"
@@ -62,6 +67,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
         {
             foreach (var student in db.Users.Where(u => u.Student != null))
             {
+                db.Entry(student.Student).State = EntityState.Deleted;
                 db.Entry(student).State = EntityState.Deleted;
             }
             db.SaveChanges();
@@ -73,9 +79,10 @@ namespace StudentAssAttSys.Infrastructure.Tests
             {
                 new Lecturer
                 {
-                    Id = "JLect",
+
                     User = new User
                     {
+                        Id = "JLect",
                         FirstName = "John",
                         LastName = "Test",
                         Email = "john.test@mail.itsligo.ie"
@@ -83,9 +90,10 @@ namespace StudentAssAttSys.Infrastructure.Tests
                 },
                 new Lecturer
                 {
-                    Id = "BLect",
+
                     User = new User
                     {
+                        Id = "BLect",
                         FirstName = "Bali",
                         LastName = "Test",
                         Email = "bali.test@mail.itsligo.ie"
@@ -99,6 +107,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
         {
             foreach (var lectuer in db.Users.Where(u => u.Lecturer != null))
             {
+                db.Entry(lectuer.Lecturer).State = EntityState.Deleted;
                 db.Entry(lectuer).State = EntityState.Deleted;
             }
             db.SaveChanges();
@@ -126,6 +135,8 @@ namespace StudentAssAttSys.Infrastructure.Tests
         {
             foreach (var module in db.Modules)
             {
+                module.Lecturers = null;
+                module.Students = null;
                 db.Entry(module).State = EntityState.Deleted;
             }
             db.SaveChanges();
@@ -192,6 +203,62 @@ namespace StudentAssAttSys.Infrastructure.Tests
             foreach (var assessment in db.Assessments)
             {
                 db.Entry(assessment).State = EntityState.Deleted;
+            }
+
+            db.SaveChanges();
+        }
+
+        public static void SeedResults(StudentAssAttSysContext db)
+        {
+            db.Assessments.AddRange(new List<Assessment>()
+            {
+                new Assessment
+                {
+                    DateTimeStart = DateTime.Now.AddHours(-1),
+                    DateTimeEnd = DateTime.Now.AddHours(1),
+                    LecturerId = db.Lecturers.FirstOrDefault().Id,
+                    ModuleId = db.Modules.FirstOrDefault().Id,
+                    Results = new List<Result>
+                    {
+                        new Result
+                        {
+                            StudentId = db.Students.FirstOrDefault().Id,
+                            Grade = 20
+                        }
+                    }
+                },
+                new Assessment
+                {
+                    DateTimeStart = DateTime.Now.AddHours(-1),
+                    DateTimeEnd = DateTime.Now.AddHours(1),
+                    LecturerId = db.Lecturers.FirstOrDefault().Id,
+                    ModuleId = db.Modules.FirstOrDefault().Id,
+                    Results = new List<Result>
+                    {
+                        new Result
+                        {
+                            StudentId = db.Students.FirstOrDefault().Id,
+                            Grade = 50
+                        }
+                    }
+                }
+            });
+            db.SaveChanges();
+        }
+
+        public static void RemoveResults(StudentAssAttSysContext db)
+        {
+            foreach (var assessment in db.Assessments)
+            {
+                if (assessment.Results != null)
+                {
+                    foreach (Result result in assessment.Results.ToList())
+                    {
+                        db.Entry(result).State = EntityState.Deleted;
+                    }
+                    db.Entry(assessment).State = EntityState.Deleted;
+                }
+
             }
 
             db.SaveChanges();

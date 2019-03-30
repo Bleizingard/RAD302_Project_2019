@@ -16,6 +16,7 @@ namespace StudentAssAttSys.Core.Core
         public virtual User User { get; set; }
         [Required]
         public string StudentNumber { get; set; }
-        
+        public virtual List<Result> Results { get; set; }
+        public virtual List<Module> Modules { get; set; }
     }
 }

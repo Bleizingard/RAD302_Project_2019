@@ -26,7 +26,15 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                context.Entry(o).State = EntityState.Added;
+                User user = o.User;
+                user.Id = o.Id;
+
+                user.Student = new Student
+                {
+                    StudentNumber = o.StudentNumber
+                };
+
+                context.Entry(user).State = EntityState.Added;
                 context.SaveChanges();
                 return o.Id;
             }
@@ -52,13 +60,12 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             {
                 student.StudentNumber = o.StudentNumber;
                 student.Id = o.Id;
-                student.User.Assessments = o.User.Assessments;
                 student.User.Attendances = o.User.Attendances;
                 student.User.Comments = o.User.Comments;
                 student.User.Email = o.User.Email;
                 student.User.FirstName = o.User.FirstName;
                 student.User.LastName = o.User.LastName;
-                student.User.Modules = o.User.Modules;
+                student.Modules = o.Modules;
 
                 context.Entry(student).State = EntityState.Modified;
 
@@ -97,13 +104,15 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                User user = context.Users.Find(o.Id);
+                User user = context.Users.FirstOrDefault(u => u.Id.Equals(o.Id));
+
+                context.Entry(user.Student).State = EntityState.Deleted;
                 context.Entry(user).State = EntityState.Deleted;
                 context.SaveChanges();
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }

@@ -31,7 +31,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
                 context.SaveChanges();
                 return o.Id;
             }
-            catch
+            catch(Exception ex)
             {
                 return -1;
             }

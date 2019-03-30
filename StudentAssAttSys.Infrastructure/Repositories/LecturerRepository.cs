@@ -26,11 +26,15 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                context.Entry(o).State = EntityState.Added;
+                User user = o.User;
+                user.Id = o.Id;
+                user.Lecturer = new Lecturer();
+
+                context.Entry(user).State = EntityState.Added;
                 context.SaveChanges();
                 return o.Id;
             }
-            catch
+            catch (Exception ex)
             {
                 return "-1";
             }
@@ -47,13 +51,13 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             try
             {
                 lecturer.Id = o.Id;
-                lecturer.User.Assessments = o.User.Assessments;
+                lecturer.Assessments = o.Assessments;
                 lecturer.User.Attendances = o.User.Attendances;
                 lecturer.User.Comments = o.User.Comments;
                 lecturer.User.Email = o.User.Email;
                 lecturer.User.FirstName = o.User.FirstName;
                 lecturer.User.LastName = o.User.LastName;
-                lecturer.User.Modules = o.User.Modules;
+                lecturer.Modules = o.Modules;
 
                 context.Entry(lecturer).State = EntityState.Modified;
 
@@ -72,7 +76,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public Lecturer[] GetAll()
         {
-            return context.Lecturers.ToArray();
+            return context.Lecturers.Include(l => l.User).ToArray();
         }
 
         /**
@@ -81,7 +85,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
          */
         public Lecturer GetById(string id)
         {
-            return context.Lecturers.FirstOrDefault(l => l.Id.Equals(id));
+            return context.Lecturers.Include(l => l.User).Where(l => l.Id.Equals(id)).FirstOrDefault();
         }
 
         /**
@@ -92,13 +96,14 @@ namespace StudentAssAttSys.Infrastructure.Repositories
         {
             try
             {
-                User user = context.Users.Find(o.Id);
+                User user = context.Users.Include(u => u.Lecturer).FirstOrDefault(u => u.Id.Equals(o.Id));
+                context.Entry(user.Lecturer).State = EntityState.Deleted;
                 context.Entry(user).State = EntityState.Deleted;
                 context.SaveChanges();
 
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

@@ -45,9 +45,27 @@ namespace StudentAssAttSys.Infrastructure
                 .HasRequired(e => e.Student)
                 .WithMany()
                 .WillCascadeOnDelete(false);
-            
+
+            // Configure the primary key for the OfficeAssignment
             modelBuilder.Entity<Student>()
-                .HasKey(s => s.Id);
+                .HasKey(t => t.Id);
+
+            // Map one-to-zero or one relationship
+            modelBuilder.Entity<Student>()
+                .HasRequired(t => t.User)
+                .WithOptional(t => t.Student)
+                .WillCascadeOnDelete(true);
+
+            // Configure the primary key for the OfficeAssignment
+            modelBuilder.Entity<Lecturer>()
+                .HasKey(t => t.Id);
+
+            // Map one-to-zero or one relationship
+            modelBuilder.Entity<Lecturer>()
+                .HasRequired(t => t.User)
+                .WithOptional(t => t.Lecturer)
+                .WillCascadeOnDelete(true);
+
         }
     }
 }

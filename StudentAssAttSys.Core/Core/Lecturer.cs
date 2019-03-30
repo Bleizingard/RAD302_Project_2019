@@ -10,10 +10,11 @@ namespace StudentAssAttSys.Core.Core
 {
     public class Lecturer
     {
-        [Key]
         [ForeignKey("User")]
         public string Id { get; set; }
 
-        public virtual User User {get;set;}
+        public virtual User User { get; set; }
+        public virtual List<Module> Modules { get; set; }
+        public virtual List<Assessment> Assessments { get; set; }
     }
 }

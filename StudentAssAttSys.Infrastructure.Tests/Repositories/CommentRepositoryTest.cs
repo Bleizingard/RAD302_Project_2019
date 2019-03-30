@@ -13,18 +13,28 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
     public class CommentRepositoryTest
     {
         private CommentRepository Repository;
-
+        private StudentAssAttSysContext Context;
         [OneTimeSetUp]
         public void InitialSetup()
         {
             Repository = new CommentRepository();
+            Context = new StudentAssAttSysContext();
         }
 
         [SetUp]
         public void SetUp()
         {
+            InfrastructureTestsSeed.SeedAll(Context);
+
+            Result result = Context.Results.FirstOrDefault();
+            Student student = Context.Students.FirstOrDefault();
+            User user = Context.Users.FirstOrDefault();
+
             Repository.Add(new Comment
             {
+                AssessmentId = result.AssessmentId,
+                StudentId = result.StudentId,
+                UserId = user.Id,
                 Message = "FirstComment",
                 DateTimeCreation = DateTime.Today
             });
@@ -38,35 +48,51 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Repository.Remove(comment);
             }
+
+            InfrastructureTestsSeed.RemoveAll(Context);
         }
 
         [Test]
         public void ShouldAddComment()
         {
+            Result result = Context.Results.FirstOrDefault();
+            Student student = Context.Students.FirstOrDefault();
+            User user = Context.Users.FirstOrDefault();
+
             Comment comment = new Comment
             {
+                AssessmentId = result.AssessmentId,
+                StudentId = result.StudentId,
+                UserId = user.Id,
                 Message = "ShouldAddCommentTest",
                 DateTimeCreation = DateTime.Today
             };
-            int result = Repository.Add(comment);
-            Assert.That(result, Is.GreaterThan(0));
+            int resultB = Repository.Add(comment);
+            Assert.That(resultB, Is.GreaterThan(0));
         }
 
         [Test]
         public void ShouldEditComment()
         {
+            Result result = Context.Results.FirstOrDefault();
+            Student student = Context.Students.FirstOrDefault();
+            User user = Context.Users.FirstOrDefault();
+
             int commentId = Repository.Add(new Comment
             {
+                AssessmentId = result.AssessmentId,
+                StudentId = result.StudentId,
+                UserId = user.Id,
                 Message = "ShouldEditComment",
                 DateTimeCreation = DateTime.Today
             });
             Comment comment = Repository.GetById(commentId);
             comment.Message = "NewMessage";
-            bool result = Repository.Edit(comment);
+            bool resultB = Repository.Edit(comment);
             comment = Repository.GetById(commentId);
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(result);
+                Assert.IsTrue(resultB);
                 Assert.That(comment.Message, Is.EqualTo("NewMessage"));
             });
         }
@@ -81,8 +107,15 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         [Test]
         public void ShouldGetByCommentId()
         {
+            Result result = Context.Results.FirstOrDefault();
+            Student student = Context.Students.FirstOrDefault();
+            User user = Context.Users.FirstOrDefault();
+
             int commentId = Repository.Add(new Comment
             {
+                AssessmentId = result.AssessmentId,
+                StudentId = result.StudentId,
+                UserId = user.Id,
                 Message = "GetCommentByIdTest",
                 DateTimeCreation = DateTime.Today
             });

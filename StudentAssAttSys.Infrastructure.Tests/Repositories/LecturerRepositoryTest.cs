@@ -79,10 +79,9 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         {
             string lecturerId = Repository.Add(new Lecturer
             {
-                Id = "heuiheufh",
+                Id = "heuiheufhmbm",
                 User = new User
                 {
-                    Id = "heuiheufh2",
                     FirstName = "ShouldEditLecturer",
                     LastName = "Test",
                     Email = "FirstLecturerTest@mail.itsligo.ie"

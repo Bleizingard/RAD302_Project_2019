@@ -29,7 +29,7 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             Student student = new Student
             {
                 Id = "heuiheufh",
-                User = new User
+                User = new User()
                 {
                     FirstName = "FirstStudent",
                     LastName = "Test",
