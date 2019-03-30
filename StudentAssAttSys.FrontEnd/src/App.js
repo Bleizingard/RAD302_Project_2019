@@ -30,13 +30,83 @@ class App extends Component {
     };
   }
 
+  IsUserAlreadyInDb(token) {
+    var found = false;
+    return new Promise((resolve, reject) => {
+      fetch("https://localhost:44342/api/Students", {
+        method: "GET",
+        mode: "cors",
+        referrer: "no-referrer",
+        headers: new Headers({
+          Authorization: "Bearer " + getToken(),
+          "Content-Type": "application/json"
+        })
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(res => {
+          res.forEach(user => {
+            if (user.Email === token.unique_name) {
+              found = true;
+            }
+          });
+          if (found) {
+            resolve(false);
+          } else {
+            resolve(false);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
+  TryAddUserToDB(token) {
+    this.IsUserAlreadyInDb(token).then(res => {
+      if (!res) {
+        var endURL = "";
+        if (this.setRole(token.unique_name) === "student") {
+          endURL = "Student";
+        } else if (this.setRole(token.unique_name) === "lecturer") {
+          endURL = "Lecturer";
+        }
+        fetch(`https://localhost:44342/api/${endURL}`, {
+          method: "PUT",
+          mode: "cors",
+          referrer: "no-referrer",
+
+          headers: new Headers({
+            Authorization: "Bearer " + this.state.apiToken,
+            "Content-Type": "application/json"
+          }),
+          body: JSON.stringify({
+            Id: token.oid,
+            FirstName: token.given_name,
+            LastName: token.family_name,
+            Email: token.unique_name
+          })
+        })
+          .then(res => {
+            if (res.code === 201) {
+              alert("User added to database");
+            }
+          })
+          .catch(err => console.log(err));
+      }
+    });
+  }
+
   componentDidMount() {
     runWithAdal(authContext, () => {
-      console.log(getToken());
       if (getToken()) {
         var unique = jwtDecode(getToken()).unique_name;
         var apiToken = getToken();
         var name = jwtDecode(getToken()).name;
+
+        this.TryAddUserToDB(jwtDecode(getToken()));
 
         this.setState({
           uniqueName: unique,
@@ -69,16 +139,13 @@ class App extends Component {
   getStudentNr(email) {
     if (email) {
       var studentNr = email.substr(0, email.indexOf("@"));
-      console.log(studentNr);
       this.setState({
         studentNumber: studentNr
       });
     }
+    return studentNr;
   }
   render() {
-    var apiToken = this.state.apiToken;
-    console.log(this.state);
-    console.log(apiToken);
     return (
       <Layout
         role={this.state.role}
