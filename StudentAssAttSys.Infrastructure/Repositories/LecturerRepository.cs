@@ -36,7 +36,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                return "-1";
+                return "";
             }
         }
 

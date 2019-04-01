@@ -21,7 +21,7 @@ namespace StudentAssAttSys.API.Controllers
     public class ModulesController : ApiController
     {
         //Repository
-        IGenericRepository<Module, int> Repository { get; set; }
+        IModuleRepository Repository { get; set; }
 
         public ModulesController()
         {
@@ -130,6 +130,26 @@ namespace StudentAssAttSys.API.Controllers
             }
 
             return Content(HttpStatusCode.OK, "");
+        }
+
+        // POST: api/Module/5/addLecturer/5
+        /**
+         * <summary></summary>
+         * <returns></returns>
+         */
+        [Route("{moduleId:int}/addLecturer/{lecturerId}")]
+        [ResponseType(typeof(Module))]
+        [HttpPost]
+        public IHttpActionResult SetLecturer(int moduleId, string lecturerId)
+        {
+            int result = Repository.AddLecturer(moduleId, lecturerId);
+            if (moduleId < 1)
+            {
+                return Content(HttpStatusCode.InternalServerError, "");
+            }
+
+            Module module = Repository.GetById(moduleId);
+            return Content(HttpStatusCode.OK, module);
         }
     }
 }

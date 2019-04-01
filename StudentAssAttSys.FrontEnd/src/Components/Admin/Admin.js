@@ -3,6 +3,18 @@ import "../Admin/Admin.css";
 import { Link } from "react-router-dom";
 import { getToken } from "../../configAzureFile.js";
 
+class LecturerRow extends Component {
+  render() {
+    var lecturers = this.props.lecturers;
+    var lecturerRows = lecturers.map(lect => (
+      <tr key={lect.Id}>
+        <td>{lect.User.FullName}</td>
+      </tr>
+    ));
+    return <table>{lecturerRows}</table>;
+  }
+}
+
 export class Admin extends Component {
   displayName = Admin.name;
   constructor(props) {
@@ -37,20 +49,24 @@ export class Admin extends Component {
 
   render() {
     console.log(this.state);
-    console.log();
     const moduleRow = this.state.modules.map(module => (
       <tr key={module.Id}>
         <td className="text-center">{module.Id}</td>
         <td className="text-center">{module.Name}</td>
-        <td className="text-center">
-          {module.Lecturers.length > 0
-            ? module.Lecturers[0].name
-            : `No lecturer`}
+        <td class="d-flex justify-content-center">
+          {module.Lecturers.length > 0 ? (
+            <LecturerRow lecturers={module.Lecturers} />
+          ) : (
+            `No lecturer`
+          )}
         </td>
         <td className="text-center">{module.GPAPercentage}</td>
         <td className="text-center">
-          <Link to="/editLecturer" className="btn btn-primary btn-sm">
-            Edit Lecturer
+          <Link
+            to={`/editLecturer/${module.Id}`}
+            className="btn btn-primary btn-sm"
+          >
+            Add Lecturer
           </Link>
         </td>
       </tr>

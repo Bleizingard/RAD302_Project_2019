@@ -162,7 +162,7 @@ class App extends Component {
         <Route path="/moduleDetails" component={ModuleDetails} />
         <Route path="/admin" component={Admin} />
         <Route path="/createModule" component={CreateModule} />
-        <Route path="/editLecturer" component={EditLecturer} />
+        <Route path="/editLecturer/:moduleId" component={EditLecturer} />
         <Route path="/student" component={Student} />
         <Route path="/lecturer" component={Lecturer} />
         <Route path="/createAttendance" component={CreateAttendance} />

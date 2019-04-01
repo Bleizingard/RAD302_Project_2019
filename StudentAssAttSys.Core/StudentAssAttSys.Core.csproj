@@ -73,6 +73,7 @@
     <Compile Include="Core\User.cs" />
     <Compile Include="IRepositories\IAttendanceRepository.cs" />
     <Compile Include="IRepositories\IGenericRepository.cs" />
+    <Compile Include="IRepositories\IModuleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
