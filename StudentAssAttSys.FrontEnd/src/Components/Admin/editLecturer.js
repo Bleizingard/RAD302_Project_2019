@@ -153,9 +153,6 @@ export class EditLecturer extends Component {
     ));
     return (
       <div className="col-sm-6 py-2">
-        <button className="btn btn-primary" onClick={this.addLecturers}>
-          Add lecturers
-        </button>
         <h5>Assign a new Lecturer for this module</h5>
         <Link to="/admin">Go Back</Link>
         <hr />
@@ -168,6 +165,9 @@ export class EditLecturer extends Component {
         <form onSubmit={this.handleSubmit} className="py-3">
           <div className="form-group input-group-sm">
             <h6 className="pt-3">Choose Lecturer</h6>
+            <button className="btn btn-link" onClick={this.addLecturers}>
+              Add mock lecturers to database
+            </button>
             <select
               id="lecturer"
               name="lecturer"
