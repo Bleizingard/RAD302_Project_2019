@@ -11,7 +11,11 @@ class LecturerRow extends Component {
         <td>{lect.User.FullName}</td>
       </tr>
     ));
-    return <table>{lecturerRows}</table>;
+    return (
+      <table>
+        <tbody>{lecturerRows}</tbody>
+      </table>
+    );
   }
 }
 
@@ -53,7 +57,7 @@ export class Admin extends Component {
       <tr key={module.Id}>
         <td className="text-center">{module.Id}</td>
         <td className="text-center">{module.Name}</td>
-        <td class="d-flex justify-content-center">
+        <td className="d-flex justify-content-center">
           {module.Lecturers.length > 0 ? (
             <LecturerRow lecturers={module.Lecturers} />
           ) : (
@@ -80,7 +84,6 @@ export class Admin extends Component {
         <div className="py-3">
           <Link to="/createModule">
             <button className="btn-primary btn btn-sm">
-              {" "}
               Create New Module
             </button>
           </Link>
