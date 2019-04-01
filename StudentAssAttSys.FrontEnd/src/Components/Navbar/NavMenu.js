@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 export class NavMenu extends Component {
   displayName = NavMenu.name;
 
+  clearSession() {
+    console.log("session clear");
+    localStorage.clear();
+  }
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-left">
@@ -47,6 +51,15 @@ export class NavMenu extends Component {
               <Link to="/admin" className="nav-link">
                 Admin<span className="sr-only">(current)</span>
               </Link>
+            </li>
+            <li className="nav-item">
+              <a
+                href="https://login.windows.net/mailitsligo.onmicrosoft.com/oauth2/logout?post_logout_redirect_uri=https://localhost:3000/"
+                className="btn btn-sm btn-primary"
+                onClick={this.clearSession}
+              >
+                LogOut
+              </a>
             </li>
           </ul>
         </div>
