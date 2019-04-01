@@ -13,6 +13,10 @@ namespace StudentAssAttSys.API
             // Configuration et services API Web
 
             // Itinéraires de l'API Web
+
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling =
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
             config.MapHttpAttributeRoutes();
 
             EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");

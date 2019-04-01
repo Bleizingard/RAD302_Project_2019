@@ -47,12 +47,12 @@ class App extends Component {
         })
         .then(res => {
           res.forEach(user => {
-            if (user.Email === token.unique_name) {
+            if (user.Id === token.oid) {
               found = true;
             }
           });
           if (found) {
-            resolve(false);
+            resolve(true);
           } else {
             resolve(false);
           }
@@ -84,13 +84,17 @@ class App extends Component {
           }),
           body: JSON.stringify({
             Id: token.oid,
-            FirstName: token.given_name,
-            LastName: token.family_name,
-            Email: token.unique_name
+            StudentNumber: this.getStudentNr(token.unique_name),
+            User: {
+              Id: token.oid,
+              FirstName: token.given_name,
+              LastName: token.family_name,
+              Email: token.unique_name
+            }
           })
         })
           .then(res => {
-            if (res.code === 201) {
+            if (res.status === 201) {
               alert("User added to database");
             }
           })

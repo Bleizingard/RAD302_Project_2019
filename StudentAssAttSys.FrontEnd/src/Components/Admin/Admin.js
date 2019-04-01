@@ -26,23 +26,29 @@ export class Admin extends Component {
       .then(res => {
         return res.json();
       })
-      .then(res =>
+      .then(res => {
+        console.log(res);
         this.setState({
           modules: res
-        })
-      )
+        });
+      })
       .catch(err => console.log(err));
   }
 
   render() {
     console.log(this.state);
+    console.log();
     const moduleRow = this.state.modules.map(module => (
       <tr key={module.Id}>
-        <td>{module.Id}</td>
-        <td>{module.Name}</td>
-        <td>{module.Lecturers ? module.Lecturers.name : `No lecturer`}</td>
-        <td>{module.GPAPercentage}</td>
-        <td>
+        <td className="text-center">{module.Id}</td>
+        <td className="text-center">{module.Name}</td>
+        <td className="text-center">
+          {module.Lecturers.length > 0
+            ? module.Lecturers[0].name
+            : `No lecturer`}
+        </td>
+        <td className="text-center">{module.GPAPercentage}</td>
+        <td className="text-center">
           <Link to="/editLecturer" className="btn btn-primary btn-sm">
             Edit Lecturer
           </Link>

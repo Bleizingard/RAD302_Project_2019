@@ -20,9 +20,6 @@ export class Home extends Component {
               Login
             </Link>*/}
             <button className="btn btn-sm" onClick={this.runWithAdal} />
-
-            <p className="pt-3 text-muted">No account yet?</p>
-            <Link to="/register">Create one</Link>
           </div>
         </div>
       </div>

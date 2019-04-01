@@ -9,22 +9,7 @@ export class CreateModule extends Component {
     super(props);
     this.state = {
       moduleName: "",
-      lecturer: "",
       GPA: 0,
-      lecturers: [
-        {
-          Id: "L123",
-          FirstName: "Padraig",
-          LastName: "Harte",
-          Email: "padraig.harte@itsligo.ie"
-        },
-        {
-          Id: "L234",
-          FirstName: "Paul",
-          LastName: "Powell",
-          Email: "paul.powell@itsligo.ie"
-        }
-      ],
       apiToken: ""
     };
 
@@ -46,11 +31,6 @@ export class CreateModule extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    var lecturer = this.state.lecturers.filter(obj => {
-      return obj.Email === this.state.lecturer;
-    });
-    console.log("Lecturer");
-    console.log(lecturer);
 
     fetch("https://localhost:44342/api/Module", {
       method: "PUT",
@@ -63,8 +43,7 @@ export class CreateModule extends Component {
       }),
       body: JSON.stringify({
         name: this.state.moduleName,
-        GPAPercentage: 0,
-        Lecturers: lecturer
+        GPAPercentage: 0
       })
     })
       .then(res => {
@@ -81,14 +60,6 @@ export class CreateModule extends Component {
   }
 
   render() {
-    const lecturers = this.state.lecturers;
-
-    const options = lecturers.map(opt => (
-      <option key={`${opt.FirstName}${opt.LastName}`} value={opt.Email}>
-        {opt.FirstName} {opt.LastName}
-      </option>
-    ));
-
     return (
       <div className="col-sm-6 py-2">
         <h5>Create New Module</h5>
@@ -106,21 +77,6 @@ export class CreateModule extends Component {
               onChange={this.handleChange}
               value={this.state.moduleName}
             />
-          </div>
-          <div className="form-group input-group-sm">
-            <label htmlFor="lecturers">Choose a Lecturer for this module</label>
-            <select
-              id="lecturer"
-              name="lecturer"
-              className="form-control"
-              defaultValue=""
-              onChange={this.handleChange}
-            >
-              <option value={this.state.lecturer} disabled hidden>
-                Lecturers
-              </option>
-              {options}
-            </select>
           </div>
           <div className="d-flex justify-content-center">
             <button type="submit" className="btn col-sm-4 btn-sm btn-primary">
