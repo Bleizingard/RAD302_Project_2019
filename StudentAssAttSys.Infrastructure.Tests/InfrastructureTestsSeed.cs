@@ -28,7 +28,6 @@ namespace StudentAssAttSys.Infrastructure.Tests
             RemoveModules(db);
             RemoveStudents(db);
             RemoveLecturers(db);
-
         }
 
         public static void SeedStudents(StudentAssAttSysContext db)
@@ -67,37 +66,32 @@ namespace StudentAssAttSys.Infrastructure.Tests
         {
             foreach (var student in db.Users.Where(u => u.Student != null))
             {
-                db.Entry(student.Student).State = EntityState.Deleted;
-                db.Entry(student).State = EntityState.Deleted;
+                db.Users.Remove(student);
+                //db.Entry(student).State = EntityState.Deleted;
             }
             db.SaveChanges();
         }
 
         public static void SeedLecturers(StudentAssAttSysContext db)
         {
-            db.Lecturers.AddRange(new List<Lecturer>()
+            db.Users.AddRange(new List<User>
             {
-                new Lecturer
-                {
 
-                    User = new User
+                     new User()
                     {
                         Id = "JLect",
                         FirstName = "John",
                         LastName = "Test",
-                        Email = "john.test@mail.itsligo.ie"
-                    }
-                },
-                new Lecturer
-                {
-
-                    User = new User
+                        Email = "john.test@mail.itsligo.ie",
+                        Lecturer = new Lecturer()
+                    },
+                new User
                     {
                         Id = "BLect",
                         FirstName = "Bali",
                         LastName = "Test",
-                        Email = "bali.test@mail.itsligo.ie"
-                    }
+                        Email = "bali.test@mail.itsligo.ie",
+                        Lecturer = new Lecturer()
                 }
             });
             db.SaveChanges();
@@ -105,11 +99,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveLecturers(StudentAssAttSysContext db)
         {
-            foreach (var lectuer in db.Users.Where(u => u.Lecturer != null))
-            {
-                db.Entry(lectuer.Lecturer).State = EntityState.Deleted;
-                db.Entry(lectuer).State = EntityState.Deleted;
-            }
+            db.Users.RemoveRange(db.Users);
             db.SaveChanges();
         }
 
@@ -133,12 +123,7 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveModules(StudentAssAttSysContext db)
         {
-            foreach (var module in db.Modules)
-            {
-                module.Lecturers = null;
-                module.Students = null;
-                db.Entry(module).State = EntityState.Deleted;
-            }
+            db.Modules.RemoveRange(db.Modules);
             db.SaveChanges();
         }
 
@@ -200,12 +185,12 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveAssessments(StudentAssAttSysContext db)
         {
-            foreach (var assessment in db.Assessments)
-            {
-                db.Entry(assessment).State = EntityState.Deleted;
-            }
+            //if (db.Assessments.Count() > 0)
+            //{
+            //    db.Assessments.RemoveRange(db.Assessments);
 
-            db.SaveChanges();
+            //    db.SaveChanges();
+            //}
         }
 
         public static void SeedResults(StudentAssAttSysContext db)
@@ -248,17 +233,9 @@ namespace StudentAssAttSys.Infrastructure.Tests
 
         public static void RemoveResults(StudentAssAttSysContext db)
         {
-            foreach (var assessment in db.Assessments)
+            foreach (var result in db.Results)
             {
-                if (assessment.Results != null)
-                {
-                    foreach (Result result in assessment.Results.ToList())
-                    {
-                        db.Entry(result).State = EntityState.Deleted;
-                    }
-                    db.Entry(assessment).State = EntityState.Deleted;
-                }
-
+                db.Entry(result).State = EntityState.Deleted;
             }
 
             db.SaveChanges();

@@ -18,5 +18,6 @@ namespace StudentAssAttSys.Core.Core
         public string StudentNumber { get; set; }
         public virtual List<Result> Results { get; set; }
         public virtual List<Module> Modules { get; set; }
+        public virtual List<Attendance> Attendances { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
         public void InitialSetup()
         {
             Repository = new ResultRepository();
-            CleanUp();
         }
 
         [SetUp]
@@ -43,6 +42,10 @@ namespace StudentAssAttSys.Infrastructure.Tests.Repositories
             {
                 Repository.Remove(result);
             }
+
+
+            dbContext.SaveChanges();
+
             InfrastructureTestsSeed.RemoveAll(dbContext);
         }
 

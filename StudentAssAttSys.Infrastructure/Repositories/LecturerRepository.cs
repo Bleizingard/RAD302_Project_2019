@@ -52,7 +52,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             {
                 lecturer.Id = o.Id;
                 lecturer.Assessments = o.Assessments;
-                lecturer.User.Attendances = o.User.Attendances;
+                lecturer.Attendances = o.Attendances;
                 lecturer.User.Comments = o.User.Comments;
                 lecturer.User.Email = o.User.Email;
                 lecturer.User.FirstName = o.User.FirstName;

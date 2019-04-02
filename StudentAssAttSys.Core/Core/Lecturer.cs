@@ -16,5 +16,6 @@ namespace StudentAssAttSys.Core.Core
         public virtual User User { get; set; }
         public virtual List<Module> Modules { get; set; }
         public virtual List<Assessment> Assessments { get; set; }
+        public virtual List<Attendance> Attendances { get; set; }
     }
 }

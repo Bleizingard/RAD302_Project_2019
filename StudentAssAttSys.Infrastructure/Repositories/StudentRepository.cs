@@ -60,7 +60,7 @@ namespace StudentAssAttSys.Infrastructure.Repositories
             {
                 student.StudentNumber = o.StudentNumber;
                 student.Id = o.Id;
-                student.User.Attendances = o.User.Attendances;
+                student.Attendances = o.Attendances;
                 student.User.Comments = o.User.Comments;
                 student.User.Email = o.User.Email;
                 student.User.FirstName = o.User.FirstName;

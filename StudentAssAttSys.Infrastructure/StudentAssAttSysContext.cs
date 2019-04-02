@@ -33,7 +33,7 @@ namespace StudentAssAttSys.Infrastructure
         public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<Assessment> Assessments { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<Comment> Comments  { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Result> Results { get; set; }
 
